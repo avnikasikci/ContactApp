@@ -5,7 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ContactApp.Module.User.Application\ContactApp.Module.User.Application.csproj" />
+    <PackageReference Include="FluentValidation" Version="11.2.2" />
+    <PackageReference Include="MediatR" Version="10.0.1" />
   </ItemGroup>
 
 </Project>

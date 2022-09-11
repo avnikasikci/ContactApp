@@ -1,4 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿
+using ContactApp.Module.Person.Application.Features.User.Command;
+using ContactApp.Module.Person.Application.Features.User.Dtos;
+using ContactApp.Module.Person.Application.Features.User.Queries;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,14 +17,35 @@ namespace ContactApp.Module.User.WebApi.Controllers
         [HttpGet]
         public async Task<IActionResult> GetList()
         {
-            GetListPersonQuery getListPersonQuery = new() { };
-            List<PersonListDto> result = await this.Mediator.Send(getListPersonQuery);
+            GetListUserQuery getListPersonQuery = new() { };
+            List<UserDto> result = await this.Mediator.Send(getListPersonQuery);
             return Ok(result);
         }
         [HttpPost]
-        public async Task<IActionResult> Add([FromBody] CreatePersonCommand createPersonCommand)
+        public async Task<IActionResult> Add([FromBody] CreateUserCommand createUserCommand)
         {
-            CreatedPersonDto result = await Mediator.Send(createPersonCommand);
+            CreatedUserDto result = await Mediator.Send(createUserCommand);
+            return Created("", result);
+        }
+        [HttpPut]
+        public async Task<IActionResult> Update([FromBody] UpdateUserCommand updateUserCommand)
+        {
+            UpdateUserDto result = await Mediator.Send(updateUserCommand);
+            return Created("", result);
+        }
+        //[HttpDelete]
+        [HttpDelete]
+        public async Task<IActionResult> Delete([FromBody] DeleteUserCommand deleteUserCommand)
+        {
+            string result = await Mediator.Send(deleteUserCommand);
+            return Created("", result);
+        }
+        [HttpGet("{ObjectId}")]
+        public async Task<IActionResult> GetById(string ObjectId)
+        {
+            GetByIdUserQuery getByIdUserQuery = new() { ObjectId = ObjectId };
+
+            UserDto result = await Mediator.Send(getByIdUserQuery);
             return Created("", result);
         }
     }

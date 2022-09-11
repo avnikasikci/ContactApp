@@ -5,13 +5,21 @@ VisualStudioVersion = 16.0.32802.440
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Module", "Module", "{390CB87F-2C80-47AD-B425-31767EF74082}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContactApp.Module.Person.Application", "ContactApp.Module.Person.Application\ContactApp.Module.Person.Application.csproj", "{B460518F-B237-472E-8266-06C7F2BBDF2F}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContactApp.Module.User.Persistence", "ContactApp.Module.User.Persistence\ContactApp.Module.User.Persistence.csproj", "{EC4CADAA-1E21-44A8-9D78-E2F4EDFE0700}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContactApp.Module.User.Application", "ContactApp.Module.User.Application\ContactApp.Module.User.Application.csproj", "{2198FE59-F655-48B5-B56E-530E993FB155}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContactApp.Module.User.WebApi", "ContactApp.Module.User.WebApi\ContactApp.Module.User.WebApi.csproj", "{B42FC04E-CA73-4557-82FF-50EF82DCE9E7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContactApp.Core.Persistence", "ContactApp.Core.Persistence\ContactApp.Core.Persistence.csproj", "{0A6CB1A2-9512-4C99-9254-C6274AD30F54}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContactApp.Core.Application", "ContactApp.Core.Application\ContactApp.Core.Application.csproj", "{CB59CD59-00E8-446D-A916-5F7BD1B96467}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContactApp.Module.Report.Application", "ContactApp.Module.Report.Application\ContactApp.Module.Report.Application.csproj", "{68BD9369-89F8-4F6B-A544-1D6EC3BD4C4A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContactApp.Module.Report.Persistence", "ContactApp.Module.Report.Persistence\ContactApp.Module.Report.Persistence.csproj", "{94350570-0450-4F3F-A4D7-D648C347174F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContactApp.Module.Report.WebApi", "ContactApp.Module.Report.WebApi\ContactApp.Module.Report.WebApi.csproj", "{FEAD8751-A598-4F0F-B822-B5B9FC5CC2CA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,10 +27,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{B460518F-B237-472E-8266-06C7F2BBDF2F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B460518F-B237-472E-8266-06C7F2BBDF2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B460518F-B237-472E-8266-06C7F2BBDF2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B460518F-B237-472E-8266-06C7F2BBDF2F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{EC4CADAA-1E21-44A8-9D78-E2F4EDFE0700}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{EC4CADAA-1E21-44A8-9D78-E2F4EDFE0700}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EC4CADAA-1E21-44A8-9D78-E2F4EDFE0700}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -35,15 +39,37 @@ Global
 		{B42FC04E-CA73-4557-82FF-50EF82DCE9E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B42FC04E-CA73-4557-82FF-50EF82DCE9E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B42FC04E-CA73-4557-82FF-50EF82DCE9E7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0A6CB1A2-9512-4C99-9254-C6274AD30F54}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0A6CB1A2-9512-4C99-9254-C6274AD30F54}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0A6CB1A2-9512-4C99-9254-C6274AD30F54}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0A6CB1A2-9512-4C99-9254-C6274AD30F54}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CB59CD59-00E8-446D-A916-5F7BD1B96467}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CB59CD59-00E8-446D-A916-5F7BD1B96467}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CB59CD59-00E8-446D-A916-5F7BD1B96467}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CB59CD59-00E8-446D-A916-5F7BD1B96467}.Release|Any CPU.Build.0 = Release|Any CPU
+		{68BD9369-89F8-4F6B-A544-1D6EC3BD4C4A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{68BD9369-89F8-4F6B-A544-1D6EC3BD4C4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{68BD9369-89F8-4F6B-A544-1D6EC3BD4C4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{68BD9369-89F8-4F6B-A544-1D6EC3BD4C4A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{94350570-0450-4F3F-A4D7-D648C347174F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{94350570-0450-4F3F-A4D7-D648C347174F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{94350570-0450-4F3F-A4D7-D648C347174F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{94350570-0450-4F3F-A4D7-D648C347174F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FEAD8751-A598-4F0F-B822-B5B9FC5CC2CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FEAD8751-A598-4F0F-B822-B5B9FC5CC2CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FEAD8751-A598-4F0F-B822-B5B9FC5CC2CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FEAD8751-A598-4F0F-B822-B5B9FC5CC2CA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{B460518F-B237-472E-8266-06C7F2BBDF2F} = {390CB87F-2C80-47AD-B425-31767EF74082}
 		{EC4CADAA-1E21-44A8-9D78-E2F4EDFE0700} = {390CB87F-2C80-47AD-B425-31767EF74082}
 		{2198FE59-F655-48B5-B56E-530E993FB155} = {390CB87F-2C80-47AD-B425-31767EF74082}
 		{B42FC04E-CA73-4557-82FF-50EF82DCE9E7} = {390CB87F-2C80-47AD-B425-31767EF74082}
+		{68BD9369-89F8-4F6B-A544-1D6EC3BD4C4A} = {390CB87F-2C80-47AD-B425-31767EF74082}
+		{94350570-0450-4F3F-A4D7-D648C347174F} = {390CB87F-2C80-47AD-B425-31767EF74082}
+		{FEAD8751-A598-4F0F-B822-B5B9FC5CC2CA} = {390CB87F-2C80-47AD-B425-31767EF74082}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {07EF47D2-EF2C-4B56-AF51-583B847CBC5A}

@@ -1,6 +1,3 @@
-using ContactApp.Core.Persistence.DbProvider;
-using ContactApp.Module.User.Application;
-using ContactApp.Module.User.Persistence;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -13,12 +10,9 @@ using Microsoft.OpenApi.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using System.Threading.Tasks;
-using MediatR;
 
-
-namespace ContactApp.Module.User.WebApi
+namespace ContactApp.Module.Report.WebApi
 {
     public class Startup
     {
@@ -32,17 +26,11 @@ namespace ContactApp.Module.User.WebApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            //services.AddScoped<Mediator>();
-            services.AddMediatR(Assembly.GetExecutingAssembly());
-
-            services.AddPersistenceServices(Configuration);
-            services.AddApplicationServices();
-
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "ContactApp.Module.User.WebApi", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "ContactApp.Module.Report.WebApi", Version = "v1" });
             });
         }
 
@@ -53,7 +41,7 @@ namespace ContactApp.Module.User.WebApi
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "ContactApp.Module.User.WebApi v1"));
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "ContactApp.Module.Report.WebApi v1"));
             }
 
             app.UseHttpsRedirection();

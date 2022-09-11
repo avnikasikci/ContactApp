@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ContactApp.Module.User.Persistence
+namespace ContactApp.Module.Report.Application
 {
     public class Class1
     {

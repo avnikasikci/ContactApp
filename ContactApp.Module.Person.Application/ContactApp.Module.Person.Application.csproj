@@ -4,4 +4,15 @@
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Features\User\Models\" />
+    <Folder Include="Features\User\Rules\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="11.0.1" />
+    <PackageReference Include="MediatR" Version="10.0.1" />
+    <PackageReference Include="MongoDB.Bson" Version="2.17.1" />
+  </ItemGroup>
+
 </Project>

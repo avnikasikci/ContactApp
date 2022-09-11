@@ -1,6 +1,6 @@
 using System;
 
-namespace ContactApp.Module.User.WebApi
+namespace ContactApp.Module.Report.WebApi
 {
     public class WeatherForecast
     {

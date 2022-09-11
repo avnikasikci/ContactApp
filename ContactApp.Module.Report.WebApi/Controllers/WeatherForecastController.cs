@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ContactApp.Module.User.WebApi.Controllers
+namespace ContactApp.Module.Report.WebApi.Controllers
 {
     [ApiController]
     [Route("[controller]")]
