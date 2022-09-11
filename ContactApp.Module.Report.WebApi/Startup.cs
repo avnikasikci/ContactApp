@@ -1,3 +1,6 @@
+using ContactApp.Module.Report.Application;
+using ContactApp.Module.Report.Persistence;
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -10,6 +13,7 @@ using Microsoft.OpenApi.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 
 namespace ContactApp.Module.Report.WebApi
@@ -26,12 +30,19 @@ namespace ContactApp.Module.Report.WebApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //services.AddScoped<Mediator>();
+            services.AddMediatR(Assembly.GetExecutingAssembly());
+
+            services.AddPersistenceServices(Configuration);
+            services.AddApplicationServices();
+
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "ContactApp.Module.Report.WebApi", Version = "v1" });
             });
+       
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

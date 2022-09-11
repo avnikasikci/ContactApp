@@ -5,7 +5,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="MediatR" Version="10.0.1" />
+    <PackageReference Include="Mongo.Migration" Version="3.1.4" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ContactApp.Module.Report.Application\ContactApp.Module.Report.Application.csproj" />
+    <ProjectReference Include="..\ContactApp.Module.Report.Persistence\ContactApp.Module.Report.Persistence.csproj" />
   </ItemGroup>
 
 </Project>

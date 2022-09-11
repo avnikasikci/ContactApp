@@ -1,7 +1,7 @@
 ﻿using ContactApp.Core.Persistence.DbProvider;
 using ContactApp.Core.Persistence.Repository;
+using ContactApp.Module.Report.Application.Services.Interfaces;
 using ContactApp.Module.User.Application.Services;
-using ContactApp.Module.User.Application.Services.Interfaces;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
@@ -11,7 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ContactApp.Module.User.Persistence
+namespace ContactApp.Module.Report.Persistence
 {
     public static class PersistenceServiceRegistration
     {
@@ -34,7 +34,7 @@ namespace ContactApp.Module.User.Persistence
             services.AddTransient(typeof(IMongoDbRepository<>), typeof(MongoDbRepository<>));
 
             //services.AddScoped<IBrandRepository, BrandRepository>();
-            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IReportService, ReportService>();
             //services.AddScoped<IModelRepository, ModelRepository>();
 
             return services;

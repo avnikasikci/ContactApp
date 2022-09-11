@@ -1,6 +1,5 @@
 using ContactApp.Core.Persistence.DbProvider;
 using ContactApp.Module.User.Application;
-using ContactApp.Module.User.Persistence;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -16,7 +15,7 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using MediatR;
-
+using ContactApp.Module.User.Persistence;
 
 namespace ContactApp.Module.User.WebApi
 {
