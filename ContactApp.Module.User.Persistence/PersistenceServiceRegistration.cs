@@ -1,4 +1,5 @@
-﻿using ContactApp.Core.Persistence.DbProvider;
+﻿using ContactApp.Core.Application.Infrastructure.ImportExport;
+using ContactApp.Core.Persistence.DbProvider;
 using ContactApp.Core.Persistence.Repository;
 using ContactApp.Module.User.Application.Services;
 using ContactApp.Module.User.Application.Services.Interfaces;
@@ -35,6 +36,7 @@ namespace ContactApp.Module.User.Persistence
 
             //services.AddScoped<IBrandRepository, BrandRepository>();
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IUserContactInformationService, UserContactInformationService>();
             //services.AddScoped<IModelRepository, ModelRepository>();
 
             return services;
