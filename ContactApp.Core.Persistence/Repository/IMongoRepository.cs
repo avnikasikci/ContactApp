@@ -36,7 +36,6 @@ namespace ContactApp.Core.Persistence.Repository
         /// </summary>
         /// <param name="entityToDelete">Kayıt</param>
         void Delete(T entityToDelete);
-        void DeleteMultiple(IEnumerable<T> Entities);
 
         void SaveChanges();
         void AddMultipleInsert(IEnumerable<T> q);
@@ -52,6 +51,10 @@ namespace ContactApp.Core.Persistence.Repository
         Task<T> AddAsync(T entity);
         Task<bool> AddRangeAsync(IEnumerable<T> entities);
         Task<bool> AddRangeModelAsync(IEnumerable<WriteModel<T>> entities);
+        Task<bool> DeleteMultipleAsync(IEnumerable<string> Entities);
+        Task<bool> DeleteManyAsync(FilterDefinition<T> filter);
+        Task<bool> DeleteOneAsync(FilterDefinition<T> filter);
+
 
         //Task<T> UpdateAsync(TKey id, T entity);
         Task<T> UpdateAsync(T entity, Expression<Func<T, bool>> predicate);
