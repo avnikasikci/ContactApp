@@ -13,7 +13,7 @@ namespace ContactApp.Module.Person.Application.Features.User.Dtos
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string CompanyName { get; set; }
-        public List<EntityContactInformation> ContactInformations { get; set; }
+        public List<UserContactInformationDto> ContactInformations { get; set; }
         public bool Active { get; set; }
     }
 }

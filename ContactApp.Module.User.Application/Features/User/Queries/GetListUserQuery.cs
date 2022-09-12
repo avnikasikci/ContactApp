@@ -19,11 +19,13 @@ namespace ContactApp.Module.Person.Application.Features.User.Queries
         public class GetListUserQueryHandler : IRequestHandler<GetListUserQuery, List<UserDto>>
         {
             private readonly IUserService _userService;
+            private readonly IUserContactInformationService _UserContactInformationService;
             private readonly IMapper _mapper;
 
-            public GetListUserQueryHandler(IUserService userService, IMapper mapper)
+            public GetListUserQueryHandler(IUserService userService, IUserContactInformationService UserContactInformationService, IMapper mapper)
             {
                 _userService = userService;
+                _UserContactInformationService = UserContactInformationService;
                 _mapper = mapper;
             }
 
@@ -31,6 +33,7 @@ namespace ContactApp.Module.Person.Application.Features.User.Queries
             {
                 List<EntityUser> personList = _userService.GetAll().ToList();
                 var mappedPersonListModel = (from m in personList
+
                                              select new UserDto
                                              {
                                                  ObjectId = m.ObjectId,
@@ -38,7 +41,11 @@ namespace ContactApp.Module.Person.Application.Features.User.Queries
                                                  CompanyName = m.CompanyName,
                                                  FirstName = m.FirstName,
                                                  LastName = m.LastName,
-                                                 ContactInformations = m.ContactInformations,
+                                                 ContactInformations = _UserContactInformationService.GetAll().Where(x => x.ObjectUserId == m.ObjectId).ToList().Select(x => new UserContactInformationDto
+                                                 {
+                                                     InformationType = x.InformationType,
+                                                     InformationDesc = x.InformationDesc
+                                                 }).ToList(),
                                              }).ToList();
 
                 return mappedPersonListModel;

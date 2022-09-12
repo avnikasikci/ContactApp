@@ -18,17 +18,19 @@ namespace ContactApp.Module.Person.Application.Features.User.Command
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string CompanyName { get; set; }
-        public List<EntityContactInformation> ContactInformations { get; set; }
+        public List<UserContactInformationDto> ContactInformations { get; set; }
         //public bool Active { get; set; }
 
         public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, CreatedUserDto>
         {
             private readonly IUserService _UserService;
+            private readonly IUserContactInformationService _UserContactInformationService;
             private readonly IMapper _mapper;
 
-            public CreateUserCommandHandler(IUserService UserService, IMapper mapper)
+            public CreateUserCommandHandler(IUserService UserService, IUserContactInformationService UserContactInformationService, IMapper mapper)
             {
                 _UserService = UserService;
+                _UserContactInformationService = UserContactInformationService;
                 _mapper = mapper;
             }
 
@@ -37,8 +39,21 @@ namespace ContactApp.Module.Person.Application.Features.User.Command
                 EntityUser mappedPerson = _mapper.Map<EntityUser>(request);
                 mappedPerson.Active = true;
                 EntityUser createdPerson = _UserService.Save(mappedPerson);
-                CreatedUserDto createdPersonDto = _mapper.Map<CreatedUserDto>(createdPerson);
 
+                List<EntityUserContactInformation> entityUserContactInformation = (from m in request.ContactInformations
+                                                                                   select new EntityUserContactInformation
+                                                                                   {
+                                                                                       InformationDesc = m.InformationDesc,
+                                                                                       InformationType = m.InformationType,
+                                                                                       ObjectUserId = createdPerson.ObjectId,
+
+                                                                                   }).ToList();
+
+                entityUserContactInformation.ForEach(x => x.ObjectUserId = createdPerson.ObjectId);
+                await _UserContactInformationService.SaveSpecial(entityUserContactInformation);
+                //List<EntityUserContactInformation> entityContactInformation = await _UserContactInformationService.SaveSpecial(entityUserContactInformation);
+                CreatedUserDto createdPersonDto = _mapper.Map<CreatedUserDto>(createdPerson);
+                createdPersonDto.ContactInformations = request.ContactInformations;
                 return createdPersonDto;
 
             }

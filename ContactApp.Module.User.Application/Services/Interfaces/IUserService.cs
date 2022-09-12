@@ -1,4 +1,5 @@
-﻿using ContactApp.Module.Person.Application.Domain;
+﻿using ContactApp.Core.Application.SharedModels;
+using ContactApp.Module.Person.Application.Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,5 +13,6 @@ namespace ContactApp.Module.User.Application.Services.Interfaces
         IQueryable<EntityUser> GetAll();
         EntityUser Save(EntityUser entityPerson);
         EntityUser SelectById(string objectId);
+        CustomerReport GetCustomerReport(string ReportName,DateTime AddedOnDate);
     }
 }
