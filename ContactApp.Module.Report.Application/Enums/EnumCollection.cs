@@ -10,9 +10,9 @@ namespace ContactApp.Module.Report.Application.Enums
     {
         public enum ReportStatus
         {
-            Wait = 1,
-            Done = 2,
-            Start = 3,
+            Start = 1,
+            Wait = 2,
+            Done = 3,
         }
     }
 }

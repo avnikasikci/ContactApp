@@ -17,7 +17,17 @@ namespace ContactApp.Module.Report.Application.Domain
         public DateTime CreateTime { get; set; }
         public DateTime UpdateTime { get; set; }
         public int ReportStatus { get; set; }
-        public string Data { get; set; }
+        public string DataJson { get; set; }
+        public byte[] FileByte { get; set; }
+        public string FilePath { get; set; }
+        public List<EntityReportData> Data { get; set; }
         public bool Active { get; set; }
+    }
+    public class EntityReportData
+    {
+        public string Location { get; set; }
+        public string UserCount { get; set; }
+        public string PhoneCount { get; set; }
+        public string MailCount { get; set; }
     }
 }

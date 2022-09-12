@@ -1,4 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using GreenPipes;
+using MassTransit;
 using System;
 using System.Reflection;
 using FluentValidation;
@@ -11,6 +13,9 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using ContactApp.Core.Application.Pipelines.Validation;
+using ContactApp.Module.Report.Application.Consumer;
+using ContactApp.Module.Report.Application.Job;
+using ContactApp.Core.Application.Infrastructure.ImportExport;
 
 namespace ContactApp.Module.Report.Application
 {
@@ -31,6 +36,43 @@ namespace ContactApp.Module.Report.Application
             //services.AddTransient(typeof(IPipelineBehavior<,>), typeof(CacheRemovingBehavior<,>));
             //services.AddTransient(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>));
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestValidationBehavior<,>));
+            services.AddScoped<ICreateReportJobService, CreateReportJobService>();
+            services.AddScoped<IExportService, XlsxExportService>();
+
+            services.AddMassTransit(x =>
+            {
+                x.AddConsumer<ReportConsumer>();
+                x.AddBus(provider => Bus.Factory.CreateUsingRabbitMq(cur =>
+                {
+                    cur.UseHealthCheck(provider);
+                    cur.Host(new Uri("rabbitmq://localhost"), h =>
+                    {
+                        h.Username("guest");
+                        h.Password("guest");
+                    });
+                    cur.ReceiveEndpoint("reportQueue", oq =>
+                    {
+                        oq.PrefetchCount = 20;
+                        oq.UseMessageRetry(r => r.Interval(2, 100));
+                        oq.ConfigureConsumer<ReportConsumer>(provider);
+                    });
+                }));
+            });
+            //services.AddMassTransit(x =>
+            //{
+            //    // Default Port : 5672
+            //    x.UsingRabbitMq((context, cfg) =>
+            //    {
+            //        cfg.Host(Configuration["RabbitMQUrl"], "/", host =>
+            //        {
+            //            host.Username("guest");
+            //            host.Password("guest");
+            //        });
+            //    });
+            //});
+
+            services.AddMassTransitHostedService();
+
 
             return services;
 
