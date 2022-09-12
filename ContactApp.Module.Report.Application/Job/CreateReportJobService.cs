@@ -91,6 +91,8 @@ namespace ContactApp.Module.Report.Application.Job
             SaveEntity= _ReportService.Save(SaveEntity);
             //SaveEntity.FilePath = "https://localhost:44397/api/Report/"+SaveEntity.ObjectId;
             SaveEntity.FilePath = "https://localhost:44397/api/Report/Export"+SaveEntity.ObjectId;
+            SaveEntity.ReportStatus = (int)EnumCollection.ReportStatus.Done; //Excell file then done this make done
+
             _ReportService.Save(SaveEntity);
 
 

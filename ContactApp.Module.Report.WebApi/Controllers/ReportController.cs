@@ -122,9 +122,9 @@ namespace ContactApp.Module.Report.WebApi.Controllers
 
             GetByIdReportQuery getByIdUserQuery = new() { ObjectId = ObjectId };
 
-            ReportDto result = await Mediator.Send(getByIdUserQuery);
-            
-
+            ReportDto result = await Mediator.Send(getByIdUserQuery) ?? new ReportDto();
+            result.Data = (result.Data != null) ? result.Data : new List<EntityReportData>();
+          
             byte[] exportResult = _ExportService.ExportListToByteArray(result.Data, new ExportDescriptor<EntityReportData>
             {
                 Items = new List<ExportDescriptorItem<EntityReportData>>
@@ -150,12 +150,12 @@ namespace ContactApp.Module.Report.WebApi.Controllers
             List<ReportDto> result = await this.Mediator.Send(getListPersonQuery);
             return Ok(result);
         }
-        [HttpPost]
-        public async Task<IActionResult> Add([FromBody] CreateReportCommand createReportCommand)
-        {
-            CreatedReportDto result = await Mediator.Send(createReportCommand);
-            return Created("", result);
-        }
+        //[HttpPost]
+        //public async Task<IActionResult> Add([FromBody] CreateReportCommand createReportCommand)
+        //{
+        //    CreatedReportDto result = await Mediator.Send(createReportCommand);
+        //    return Created("", result);
+        //}
         //[HttpPut]
         //public async Task<IActionResult> Update([FromBody] UpdateUserCommand updateUserCommand)
         //{
