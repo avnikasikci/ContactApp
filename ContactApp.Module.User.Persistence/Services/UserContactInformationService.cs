@@ -94,8 +94,6 @@ namespace ContactApp.Module.User.Application.Services
             {
                 foreach (var _Update in UpdateList)
                 {
-
-
                     var upsertOne = new ReplaceOneModel<EntityUserContactInformation>(
                         Builders<EntityUserContactInformation>.Filter.Where(x => x.ObjectId == _Update.ObjectId), _Update)
                     { IsUpsert = true };
