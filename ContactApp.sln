@@ -5,21 +5,23 @@ VisualStudioVersion = 16.0.32802.440
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Module", "Module", "{390CB87F-2C80-47AD-B425-31767EF74082}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContactApp.Module.User.Persistence", "ContactApp.Module.User.Persistence\ContactApp.Module.User.Persistence.csproj", "{EC4CADAA-1E21-44A8-9D78-E2F4EDFE0700}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ContactApp.Module.User.Persistence", "ContactApp.Module.User.Persistence\ContactApp.Module.User.Persistence.csproj", "{EC4CADAA-1E21-44A8-9D78-E2F4EDFE0700}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContactApp.Module.User.Application", "ContactApp.Module.User.Application\ContactApp.Module.User.Application.csproj", "{2198FE59-F655-48B5-B56E-530E993FB155}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ContactApp.Module.User.Application", "ContactApp.Module.User.Application\ContactApp.Module.User.Application.csproj", "{2198FE59-F655-48B5-B56E-530E993FB155}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContactApp.Module.User.WebApi", "ContactApp.Module.User.WebApi\ContactApp.Module.User.WebApi.csproj", "{B42FC04E-CA73-4557-82FF-50EF82DCE9E7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ContactApp.Module.User.WebApi", "ContactApp.Module.User.WebApi\ContactApp.Module.User.WebApi.csproj", "{B42FC04E-CA73-4557-82FF-50EF82DCE9E7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContactApp.Core.Persistence", "ContactApp.Core.Persistence\ContactApp.Core.Persistence.csproj", "{0A6CB1A2-9512-4C99-9254-C6274AD30F54}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ContactApp.Core.Persistence", "ContactApp.Core.Persistence\ContactApp.Core.Persistence.csproj", "{0A6CB1A2-9512-4C99-9254-C6274AD30F54}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContactApp.Core.Application", "ContactApp.Core.Application\ContactApp.Core.Application.csproj", "{CB59CD59-00E8-446D-A916-5F7BD1B96467}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ContactApp.Core.Application", "ContactApp.Core.Application\ContactApp.Core.Application.csproj", "{CB59CD59-00E8-446D-A916-5F7BD1B96467}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContactApp.Module.Report.Application", "ContactApp.Module.Report.Application\ContactApp.Module.Report.Application.csproj", "{68BD9369-89F8-4F6B-A544-1D6EC3BD4C4A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ContactApp.Module.Report.Application", "ContactApp.Module.Report.Application\ContactApp.Module.Report.Application.csproj", "{68BD9369-89F8-4F6B-A544-1D6EC3BD4C4A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContactApp.Module.Report.Persistence", "ContactApp.Module.Report.Persistence\ContactApp.Module.Report.Persistence.csproj", "{94350570-0450-4F3F-A4D7-D648C347174F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ContactApp.Module.Report.Persistence", "ContactApp.Module.Report.Persistence\ContactApp.Module.Report.Persistence.csproj", "{94350570-0450-4F3F-A4D7-D648C347174F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContactApp.Module.Report.WebApi", "ContactApp.Module.Report.WebApi\ContactApp.Module.Report.WebApi.csproj", "{FEAD8751-A598-4F0F-B822-B5B9FC5CC2CA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ContactApp.Module.Report.WebApi", "ContactApp.Module.Report.WebApi\ContactApp.Module.Report.WebApi.csproj", "{FEAD8751-A598-4F0F-B822-B5B9FC5CC2CA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContactApp.Core.WebApi", "ContactApp.Core.WebApi\ContactApp.Core.WebApi.csproj", "{3D978E40-586D-401D-BC53-DB6F2C2239B4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -59,6 +61,10 @@ Global
 		{FEAD8751-A598-4F0F-B822-B5B9FC5CC2CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FEAD8751-A598-4F0F-B822-B5B9FC5CC2CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FEAD8751-A598-4F0F-B822-B5B9FC5CC2CA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3D978E40-586D-401D-BC53-DB6F2C2239B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D978E40-586D-401D-BC53-DB6F2C2239B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D978E40-586D-401D-BC53-DB6F2C2239B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D978E40-586D-401D-BC53-DB6F2C2239B4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
