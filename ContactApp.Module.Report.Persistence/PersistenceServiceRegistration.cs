@@ -33,12 +33,8 @@ namespace ContactApp.Module.Report.Persistence
                      sp => sp.GetRequiredService<IOptions<MongoDbSettings>>().Value);
 
             services.AddTransient(typeof(IMongoDbRepository<>), typeof(MongoDbRepository<>));
-
-            //services.AddScoped<IBrandRepository, BrandRepository>();
             services.AddScoped<IReportService, ReportService>();
             services.AddScoped<IExportService, XlsxExportService>();
-
-            //services.AddScoped<IModelRepository, ModelRepository>();
 
             return services;
         }

@@ -19,7 +19,7 @@ namespace ContactApp.Module.Report.Application.Job
     {
         private static object _SyncRoot = new object();
 
-        private static int _lockFlag = 0; // 0 - free // Bir işlem devam ederken gelen diğer işlemler iptal edilsin sırada beklemesin diye. Flag kontrolü
+        private static int _lockFlag = 0; // 0 - free // While a transaction is in progress, other incoming transactions are canceled so that it does not wait in the queue. Flag control
 
         public CreateReportJobService()
         {
@@ -34,7 +34,7 @@ namespace ContactApp.Module.Report.Application.Job
         }
 
 
-        public void StartJob(/*JobParam Param*/  ConsumeContext<CustomerReport> context = null)
+        public void StartJob(ConsumeContext<CustomerReport> context = null)
         {
             var cancellationToken = new CancellationTokenSource().Token;
             Task.Run(async () =>
@@ -49,10 +49,9 @@ namespace ContactApp.Module.Report.Application.Job
         {
 
 
-            //if (Interlocked.CompareExchange(ref _lockFlag, 1, 0) == 0) // Lock olmuş ise çağrı sırada beklemesin iptal etsin işlemi.
+            //if (Interlocked.CompareExchange(ref _lockFlag, 1, 0) == 0) // If it is locked, the call should not wait in the queue and cancel the operation.
             //{
-            //    //fonsiyon aynı anda bir kere çalışın diye 
-            //    lock (_SyncRoot)
+            // //so that the function runs once at a time            //    lock (_SyncRoot)
             //    {
             CustomerReport customerReport = context?.Message ?? new CustomerReport() { Data = new List<CustomerReportData>() };
 
@@ -63,7 +62,7 @@ namespace ContactApp.Module.Report.Application.Job
             SaveEntity.ReportStatus = (int)EnumCollection.ReportStatus.Wait; //Excell file then done this make done
             SaveEntity.DataJson = customerReport.DataJson;
             SaveEntity.Active = true;
-            
+
             SaveEntity.Data = new List<EntityReportData>();
             foreach (var item in customerReport.Data)
             {
@@ -88,9 +87,9 @@ namespace ContactApp.Module.Report.Application.Job
             //});
             //SaveEntity.FileByte = exportResult;
 
-            SaveEntity= _ReportService.Save(SaveEntity);
+            SaveEntity = _ReportService.Save(SaveEntity);
             //SaveEntity.FilePath = "https://localhost:44397/api/Report/"+SaveEntity.ObjectId;
-            SaveEntity.FilePath = "https://localhost:44397/api/Report/Export"+SaveEntity.ObjectId;
+            SaveEntity.FilePath = "https://localhost:44397/api/Report/Export" + SaveEntity.ObjectId;
             SaveEntity.ReportStatus = (int)EnumCollection.ReportStatus.Done; //Excell file then done this make done
 
             _ReportService.Save(SaveEntity);

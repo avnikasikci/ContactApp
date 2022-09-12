@@ -27,14 +27,8 @@ namespace ContactApp.Module.Report.Application
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
             services.AddMediatR(Assembly.GetExecutingAssembly());
 
-            //services.AddScoped<BrandBusinessRules>();
-            //services.AddScoped<PersonBusinessRules>();
-
             services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
-            //services.AddTransient(typeof(IPipelineBehavior<,>), typeof(AuthorizationBehavior<,>));
-            //services.AddTransient(typeof(IPipelineBehavior<,>), typeof(CachingBehavior<,>));
-            //services.AddTransient(typeof(IPipelineBehavior<,>), typeof(CacheRemovingBehavior<,>));
-            //services.AddTransient(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>));
+
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestValidationBehavior<,>));
             services.AddScoped<ICreateReportJobService, CreateReportJobService>();
             services.AddScoped<IExportService, XlsxExportService>();
@@ -58,19 +52,6 @@ namespace ContactApp.Module.Report.Application
                     });
                 }));
             });
-            //services.AddMassTransit(x =>
-            //{
-            //    // Default Port : 5672
-            //    x.UsingRabbitMq((context, cfg) =>
-            //    {
-            //        cfg.Host(Configuration["RabbitMQUrl"], "/", host =>
-            //        {
-            //            host.Username("guest");
-            //            host.Password("guest");
-            //        });
-            //    });
-            //});
-
             services.AddMassTransitHostedService();
 
 

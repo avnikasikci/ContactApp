@@ -34,10 +34,8 @@ namespace ContactApp.Module.User.Persistence
 
             services.AddTransient(typeof(IMongoDbRepository<>), typeof(MongoDbRepository<>));
 
-            //services.AddScoped<IBrandRepository, BrandRepository>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IUserContactInformationService, UserContactInformationService>();
-            //services.AddScoped<IModelRepository, ModelRepository>();
 
             return services;
         }
