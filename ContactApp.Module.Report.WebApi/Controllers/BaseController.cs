@@ -10,7 +10,6 @@ namespace ContactApp.Module.Report.WebApi.Controllers
 {
     public class BaseController : ControllerBase
     {
-        //protected IMediator? Mediator => _mediator ??= HttpContext.RequestServices.GetService<IMediator>();
         protected IMediator Mediator => _mediator ??= HttpContext.RequestServices.GetService(typeof(IMediator)) as IMediator;
 
         private IMediator? _mediator;

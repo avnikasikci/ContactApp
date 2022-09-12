@@ -17,8 +17,7 @@ namespace ContactApp.Module.Report.Application.Domain
         public DateTime CreateTime { get; set; }
         public DateTime UpdateTime { get; set; }
         public int ReportStatus { get; set; }
-        public string DataJson { get; set; }
-        public byte[] FileByte { get; set; }
+        public string DataJson { get; set; }        
         public string FilePath { get; set; }
         public List<EntityReportData> Data { get; set; }
         public bool Active { get; set; }

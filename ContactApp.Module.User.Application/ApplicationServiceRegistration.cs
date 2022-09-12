@@ -38,14 +38,7 @@ namespace ContactApp.Module.User.Application
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
             services.AddMediatR(Assembly.GetExecutingAssembly());
 
-            //services.AddScoped<BrandBusinessRules>();
-            //services.AddScoped<PersonBusinessRules>();
-
-            services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
-            //services.AddTransient(typeof(IPipelineBehavior<,>), typeof(AuthorizationBehavior<,>));
-            //services.AddTransient(typeof(IPipelineBehavior<,>), typeof(CachingBehavior<,>));
-            //services.AddTransient(typeof(IPipelineBehavior<,>), typeof(CacheRemovingBehavior<,>));
-            //services.AddTransient(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>));
+            services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());            
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestValidationBehavior<,>));
 
 
