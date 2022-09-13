@@ -1,7 +1,7 @@
 ﻿using ContactApp.Core.Application.SharedModels;
 using ContactApp.Core.Persistence.Repository;
-using ContactApp.Module.Person.Application.Domain;
-using ContactApp.Module.Person.Application.Enums;
+using ContactApp.Module.User.Application.Domain;
+using ContactApp.Module.User.Application.Enums;
 using ContactApp.Module.User.Application.Services.Interfaces;
 using MongoDB.Driver;
 using System;

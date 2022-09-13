@@ -1,5 +1,5 @@
 ﻿using ContactApp.Core.Application.SharedModels;
-using ContactApp.Module.Person.Application.Domain;
+using ContactApp.Module.User.Application.Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;

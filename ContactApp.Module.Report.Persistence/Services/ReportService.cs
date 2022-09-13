@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ContactApp.Module.User.Application.Services
+namespace ContactApp.Module.Report.Application.Services
 {
 
     public class ReportService : IReportService

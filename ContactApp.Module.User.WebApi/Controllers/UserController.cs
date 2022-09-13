@@ -1,7 +1,7 @@
 ﻿
-using ContactApp.Module.Person.Application.Features.User.Command;
-using ContactApp.Module.Person.Application.Features.User.Dtos;
-using ContactApp.Module.Person.Application.Features.User.Queries;
+using ContactApp.Module.User.Application.Features.User.Command;
+using ContactApp.Module.User.Application.Features.User.Dtos;
+using ContactApp.Module.User.Application.Features.User.Queries;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;

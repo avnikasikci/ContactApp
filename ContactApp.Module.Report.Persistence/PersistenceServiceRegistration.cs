@@ -1,8 +1,8 @@
 ﻿using ContactApp.Core.Application.Infrastructure.ImportExport;
 using ContactApp.Core.Persistence.DbProvider;
 using ContactApp.Core.Persistence.Repository;
+using ContactApp.Module.Report.Application.Services;
 using ContactApp.Module.Report.Application.Services.Interfaces;
-using ContactApp.Module.User.Application.Services;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
