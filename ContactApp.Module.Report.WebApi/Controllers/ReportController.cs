@@ -1,7 +1,6 @@
 ﻿
 using ContactApp.Core.Application.Infrastructure.ImportExport;
 using ContactApp.Core.Application.SharedModels;
-using ContactApp.Module.Person.Application.Features.Report.Queries;
 using ContactApp.Module.Report.Application.Domain;
 using ContactApp.Module.Report.Application.Features.Report.Command;
 using ContactApp.Module.Report.Application.Features.Report.Dtos;

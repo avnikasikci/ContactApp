@@ -13,49 +13,51 @@ namespace ContactApp.Module.User.Test
     public class UserServiceTest
     {
         private readonly IUserService _userService;
+        private readonly IUserContactInformationService _UserContactInformationService;
         public UserServiceTest()
         {
             var DbProvider = new MongoDbSettings
-            { Collection = "", ConnectionString = "mongodb://localhost:27017", Database = "DbContactReport" };
-            var repositoryBudgetExpense = new MongoDbRepository<EntityUser>(DbProvider);
-
-            _userService = new UserService(repositoryBudgetExpense);
+            { Collection = "", ConnectionString = "mongodb://localhost:27017", Database = "DbContactUser" };
+            var repositoryUser = new MongoDbRepository<EntityUser>(DbProvider);
+            var repositoryEntityUserContactInformation = new MongoDbRepository<EntityUserContactInformation>(DbProvider);
+            _UserContactInformationService = new UserContactInformationService(repositoryEntityUserContactInformation);
+            _userService = new UserService(repositoryUser, _UserContactInformationService);
         }
         #region Property  
-        //public Mock<IReportService> mockReportService = new Mock<IReportService>();
+        //public Mock<IUserService> mockUserService = new Mock<IUserService>();
         #endregion
 
         [Fact]
-        public async void GetAll_Should_Return_Report()
+        public async void GetAll_Should_Return_User()
         {
-            var AllReport = _userService.GetAll().ToList();
-            Xunit.Assert.NotEqual(0, AllReport.Count);
+            var AllUser = _userService.GetAll().ToList();
+            Xunit.Assert.NotEqual(0, AllUser.Count);
         }
         [Fact]
-        public void GetSingle_Should_Return_Any_Report_By_Id()
+        public void GetSingle_Should_Return_Any_User_By_Id()
         {
             string objectId = "6320a0b35b1bcf29354e2700";
-            EntityUser report = _userService.SelectById(objectId);
-            Assert.NotNull(report);
-            Assert.Equal("Test V1", report.ReportName);
+            EntityUser user = _userService.SelectById(objectId);
+            Assert.NotNull(user);
+            Assert.Equal("Test V1", user.FirstName);
         }
         [Fact]
-        public void Create_Should_Insert_New_Report()
+        public void Create_Should_Insert_New_User()
         {
-            EntityUser report = new EntityUser();
-            report.ReportName = "Test Report";
-            var inserted = _userService.Save(report);
+            EntityUser user = new EntityUser();
+            user.FirstName = "Test User";
+            var inserted = _userService.Save(user);
             Assert.NotEqual("", inserted.ObjectId);
             Assert.Equal(24, inserted.ObjectId.Length);
         }
 
         [Fact]
-        public void Delete_Should_Remove_Report()
+        public void Delete_Should_Remove_User()
         {
 
         }
         [Fact]
-        public void Update_Should_Update_Report()
+        public void Update_Should_Update_User()
         {
 
         }

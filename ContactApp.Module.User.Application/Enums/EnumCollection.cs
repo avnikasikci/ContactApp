@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ContactApp.Module.Person.Application.Enums
+namespace ContactApp.Module.User.Application.Enums
 {
     public class EnumCollection
     {

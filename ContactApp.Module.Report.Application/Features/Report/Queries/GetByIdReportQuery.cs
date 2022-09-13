@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace ContactApp.Module.Person.Application.Features.Report.Queries
+namespace ContactApp.Module.Report.Application.Features.Report.Queries
 {
 
     public class GetByIdReportQuery : IRequest<ReportDto>

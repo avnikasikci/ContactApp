@@ -1,11 +1,11 @@
-﻿using ContactApp.Module.Person.Application.Domain;
+﻿using ContactApp.Module.User.Application.Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ContactApp.Module.Person.Application.Features.User.Dtos
+namespace ContactApp.Module.User.Application.Features.User.Dtos
 {
     public class UserDto
     {

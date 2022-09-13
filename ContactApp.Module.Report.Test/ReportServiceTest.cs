@@ -3,8 +3,8 @@
 using ContactApp.Core.Persistence.DbProvider;
 using ContactApp.Core.Persistence.Repository;
 using ContactApp.Module.Report.Application.Domain;
+using ContactApp.Module.Report.Application.Services;
 using ContactApp.Module.Report.Application.Services.Interfaces;
-using ContactApp.Module.User.Application.Services;
 using System.Linq;
 using Xunit;
 

@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using ContactApp.Module.Person.Application.Domain;
-using ContactApp.Module.Person.Application.Features.User.Dtos;
+using ContactApp.Module.User.Application.Domain;
+using ContactApp.Module.User.Application.Features.User.Dtos;
 using ContactApp.Module.User.Application.Services.Interfaces;
 using MediatR;
 using System;
@@ -10,7 +10,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace ContactApp.Module.Person.Application.Features.User.Command
+namespace ContactApp.Module.User.Application.Features.User.Command
 {
 
     public partial class UpdateUserCommand : IRequest<UpdateUserDto>

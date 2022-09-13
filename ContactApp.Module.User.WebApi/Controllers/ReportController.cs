@@ -1,5 +1,5 @@
 ﻿using ContactApp.Core.Application.SharedModels;
-using ContactApp.Module.Person.Application.Features.User.Queries;
+using ContactApp.Module.User.Application.Features.User.Queries;
 using MassTransit;
 using MediatR;
 using Microsoft.AspNetCore.Http;

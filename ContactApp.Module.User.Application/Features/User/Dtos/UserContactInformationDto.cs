@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ContactApp.Module.Person.Application.Domain
+namespace ContactApp.Module.User.Application.Domain
 {    public class UserContactInformationDto
     {
         public int InformationType { get; set; }
