@@ -36,10 +36,10 @@ namespace ContactApp.Module.User.Test
         [Fact]
         public void GetSingle_Should_Return_Any_User_By_Id()
         {
-            string objectId = "6320a0b35b1bcf29354e2700";
+            string objectId = "6320b71fec01ec967343a411";
             EntityUser user = _userService.SelectById(objectId);
             Assert.NotNull(user);
-            Assert.Equal("Test V1", user.FirstName);
+            Assert.Equal("Test User", user.FirstName);
         }
         [Fact]
         public void Create_Should_Insert_New_User()
@@ -54,11 +54,24 @@ namespace ContactApp.Module.User.Test
         [Fact]
         public void Delete_Should_Remove_User()
         {
+            EntityUser user = _userService.GetAll().FirstOrDefault();
+            string objectId = user.ObjectId;
 
+            user.Active = false;
+            _userService.Save(user);
+            var deletedUser = _userService.GetAll().Where(x => x.ObjectId == objectId).FirstOrDefault();
+            Assert.Null(deletedUser);         
         }
         [Fact]
         public void Update_Should_Update_User()
         {
+            EntityUser user = _userService.GetAll().FirstOrDefault();
+            string objectId = user.ObjectId;
+
+            user.FirstName = user.FirstName+" updated";
+            _userService.Save(user);
+            var updatedUser = _userService.GetAll().Where(x => x.ObjectId == objectId).FirstOrDefault();
+            Assert.Equal(user.FirstName , updatedUser.FirstName);
 
         }
 

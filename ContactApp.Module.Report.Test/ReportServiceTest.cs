@@ -27,10 +27,10 @@ namespace ContactApp.Module.Report.Test
         #endregion
 
         [Fact]
-        public async void GetAll_Should_Return_Report()
+        public void GetAll_Should_Return_Report()
         {
             var AllReport = _reportService.GetAll().ToList();    
-            Xunit.Assert.NotEqual(0, AllReport.Count);
+            Assert.NotEqual(0, AllReport.Count);
         }
         [Fact]
         public void GetSingle_Should_Return_Any_Report_By_Id()
@@ -50,16 +50,6 @@ namespace ContactApp.Module.Report.Test
             Assert.Equal(24, inserted.ObjectId.Length);
         }
 
-        [Fact]
-        public void Delete_Should_Remove_Report()
-        {
-          
-        }
-        [Fact]
-        public void Update_Should_Update_Report()
-        {
-
-        }
 
     }
 }
