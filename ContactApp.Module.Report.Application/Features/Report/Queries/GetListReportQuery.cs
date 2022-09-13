@@ -38,6 +38,7 @@ namespace ContactApp.Module.Report.Application.Features.Report.Queries
                                                  CreateTime = m.CreateTime,
                                                  UpdateTime = m.UpdateTime,
                                                  ReportStatus = m.ReportStatus,
+                                                 FilePath = m.FilePath,
                                              }).ToList();
 
                 return mappedPersonListModel;
