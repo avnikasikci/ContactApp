@@ -21,7 +21,6 @@
   <ItemGroup>
     <ProjectReference Include="..\ContactApp.Core.Application\ContactApp.Core.Application.csproj" />
     <ProjectReference Include="..\ContactApp.Core.Persistence\ContactApp.Core.Persistence.csproj" />
-    <ProjectReference Include="..\ContactApp.Module.Person.Application\ContactApp.Module.Person.Application.csproj" />
   </ItemGroup>
 
   <ItemGroup>

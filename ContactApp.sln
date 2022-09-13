@@ -21,7 +21,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ContactApp.Module.Report.Pe
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ContactApp.Module.Report.WebApi", "ContactApp.Module.Report.WebApi\ContactApp.Module.Report.WebApi.csproj", "{FEAD8751-A598-4F0F-B822-B5B9FC5CC2CA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContactApp.Core.WebApi", "ContactApp.Core.WebApi\ContactApp.Core.WebApi.csproj", "{3D978E40-586D-401D-BC53-DB6F2C2239B4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ContactApp.Core.WebApi", "ContactApp.Core.WebApi\ContactApp.Core.WebApi.csproj", "{3D978E40-586D-401D-BC53-DB6F2C2239B4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
