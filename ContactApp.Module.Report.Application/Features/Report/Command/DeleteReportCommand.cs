@@ -31,7 +31,8 @@ namespace ContactApp.Module.Report.Application.Features.Report.Command
                 var Entity = _ReportService.SelectById(request.ObjectId);
                 if (Entity != null)
                 {
-                    Entity.Active = false;
+                    //Entity.Active = false;
+                    Entity.setActive(false);
                     _ReportService.Save(Entity);
                     return Entity.ObjectId;
 

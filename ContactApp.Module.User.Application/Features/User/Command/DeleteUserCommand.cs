@@ -33,7 +33,9 @@ namespace ContactApp.Module.User.Application.Features.User.Command
                 var Entity = _UserService.SelectById(request.ObjectId);
                 if (Entity != null)
                 {
-                    Entity.Active = false;
+                    //Entity.Active = false;
+                    Entity.setActive(false);
+
                     _UserService.Save(Entity);
                     return Entity.ObjectId;
 

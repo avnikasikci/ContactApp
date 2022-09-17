@@ -36,9 +36,11 @@ namespace ContactApp.Module.User.Application.Features.User.Command
 
             public async Task<CreatedUserDto> Handle(CreateUserCommand request, CancellationToken cancellationToken)
             {
-                EntityUser mappedPerson = _mapper.Map<EntityUser>(request);
-                mappedPerson.Active = true;
-                EntityUser createdPerson = _UserService.Save(mappedPerson);
+                EntityUser entityUser = new EntityUser("", request.FirstName, request.LastName, request.CompanyName, true);
+                //EntityUser mappedPerson = _mapper.Map<EntityUser>(request);
+                //mappedPerson.Active = true;
+                //entityUser.setActive(true);
+                EntityUser createdPerson = _UserService.Save(entityUser);
 
                 List<EntityUserContactInformation> entityUserContactInformation = (from m in request.ContactInformations
                                                                                    select new EntityUserContactInformation

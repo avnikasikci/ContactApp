@@ -34,6 +34,7 @@ namespace ContactApp.Module.Report.Application.Features.Report.Queries
                                              select new ReportDto
                                              {
                                                  ObjectId = m.ObjectId,
+                                                 ReportName = m.ReportName,
                                                  Active = m.Active,
                                                  CreateTime = m.CreateTime,
                                                  UpdateTime = m.UpdateTime,

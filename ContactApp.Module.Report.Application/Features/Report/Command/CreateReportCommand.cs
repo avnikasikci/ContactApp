@@ -34,8 +34,8 @@ namespace ContactApp.Module.Report.Application.Features.Report.Command
             public async Task<CreatedReportDto> Handle(CreateReportCommand request, CancellationToken cancellationToken)
             {
                 EntityReport mappedReport = _mapper.Map<EntityReport>(request);
-                mappedReport.Active = true;
-
+                //mappedReport.Active = true;
+                mappedReport.setActive(true);
                 EntityReport createdReport = _ReportService.Save(mappedReport);
                 CreatedReportDto createdPersonDto = _mapper.Map<CreatedReportDto>(createdReport);
 

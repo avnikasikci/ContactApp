@@ -43,8 +43,8 @@ namespace ContactApp.Module.Report.Test
         [Fact]
         public void Create_Should_Insert_New_Report()
         {            
-            EntityReport report = new EntityReport();
-            report.ReportName = "Test Report";
+            EntityReport report = new EntityReport("","testv1",System.DateTime.Now, System.DateTime.Now,1,"",null,null,false);
+            //report.ReportName = "Test Report";
             var inserted = _reportService.Save(report);
             Assert.NotEqual("", inserted.ObjectId);
             Assert.Equal(24, inserted.ObjectId.Length);

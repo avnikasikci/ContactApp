@@ -36,34 +36,26 @@ namespace ContactApp.Module.Report.Application.Job
 
         public void StartJob(ConsumeContext<CustomerReport> context = null)
         {
-            var cancellationToken = new CancellationTokenSource().Token;
-            Task.Run(async () =>
-            {
-                await StartProcessing(cancellationToken/*, Param */, context);
-            }, cancellationToken);
-
-
+            this.StartProcessing(context);
         }
 
-        private async Task StartProcessing(CancellationToken cancellationToken = default(CancellationToken), ConsumeContext<CustomerReport> context = null)
+        private void StartProcessing(ConsumeContext<CustomerReport> context = null)
         {
-
-
-            //if (Interlocked.CompareExchange(ref _lockFlag, 1, 0) == 0) // If it is locked, the call should not wait in the queue and cancel the operation.
-            //{
-            // //so that the function runs once at a time            //    lock (_SyncRoot)
-            //    {
+            if (context == null || context.Message == null)
+            {
+                return;
+            }
             CustomerReport customerReport = context?.Message ?? new CustomerReport() { Data = new List<CustomerReportData>() };
 
-            var SaveEntity = new EntityReport();
-            SaveEntity.ReportName = customerReport.ReportName;
-            SaveEntity.CreateTime = DateTime.Now;
-            SaveEntity.UpdateTime = DateTime.Now;
-            SaveEntity.ReportStatus = (int)EnumCollection.ReportStatus.Wait; //Excell file then done this make done
-            SaveEntity.DataJson = customerReport.DataJson;
-            SaveEntity.Active = true;
+            var SaveEntity = new EntityReport("",customerReport.ReportName,DateTime.Now,DateTime.Now, (int)EnumCollection.ReportStatus.Wait,customerReport.DataJson,"", new List<EntityReportData>(), true);
+            //SaveEntity.ReportName = customerReport.ReportName;
+            //SaveEntity.CreateTime = DateTime.Now;
+            //SaveEntity.UpdateTime = DateTime.Now;
+            //SaveEntity.ReportStatus = (int)EnumCollection.ReportStatus.Wait; //Excell file then done this make done
+            //SaveEntity.DataJson = customerReport.DataJson;
+            //SaveEntity.Active = true;
 
-            SaveEntity.Data = new List<EntityReportData>();
+            //SaveEntity.Data = new List<EntityReportData>();
             foreach (var item in customerReport.Data)
             {
                 var saveDataEntity = new EntityReportData();
@@ -74,30 +66,16 @@ namespace ContactApp.Module.Report.Application.Job
                 SaveEntity.Data.Add(saveDataEntity);
             }
 
-            //byte[] exportResult = _ExportService.ExportListToByteArray(SaveEntity.Data, new ExportDescriptor<EntityReportData>
-            //{
-            //    Items = new List<ExportDescriptorItem<EntityReportData>>
-            //            {
-            //                                                new ExportDescriptorItem<EntityReportData>{ Title = "Location", Expression = c => c.Location },
-            //                                                new ExportDescriptorItem<EntityReportData>{ Title = "UserCount", Expression = c => c.UserCount },
-            //                                                new ExportDescriptorItem<EntityReportData>{ Title = "PhoneCount", Expression = c => c.PhoneCount },
-            //                                                new ExportDescriptorItem<EntityReportData>{ Title = "MailCount", Expression = c => c.MailCount },
-
-            //            }
-            //});
-            //SaveEntity.FileByte = exportResult;
 
             SaveEntity = _ReportService.Save(SaveEntity);
-            //SaveEntity.FilePath = "https://localhost:44397/api/Report/"+SaveEntity.ObjectId;
-            SaveEntity.FilePath = "https://localhost:44397/api/Report/Export" + SaveEntity.ObjectId;
-            SaveEntity.ReportStatus = (int)EnumCollection.ReportStatus.Done; //Excell file then done this make done
+            SaveEntity.setFilePath("https://localhost:44397/api/Report/Export" + SaveEntity.ObjectId);
+            //SaveEntity.FilePath = "https://localhost:44397/api/Report/Export" + SaveEntity.ObjectId;
+            SaveEntity.setReportStatus((int)EnumCollection.ReportStatus.Done);
+            //SaveEntity.ReportStatus = (int)EnumCollection.ReportStatus.Done; //Excell file then done this make done
 
             _ReportService.Save(SaveEntity);
 
 
-            //    }
-
-            //}
         }
     }
     public interface ICreateReportJobService

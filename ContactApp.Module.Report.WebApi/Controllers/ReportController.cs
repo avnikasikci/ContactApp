@@ -42,7 +42,7 @@ namespace ContactApp.Module.Report.WebApi.Controllers
 
             ReportDto result = await Mediator.Send(getByIdUserQuery) ?? new ReportDto();
             result.Data = (result.Data != null) ? result.Data : new List<EntityReportData>();
-          
+
             byte[] exportResult = _ExportService.ExportListToByteArray(result.Data, new ExportDescriptor<EntityReportData>
             {
                 Items = new List<ExportDescriptorItem<EntityReportData>>
