@@ -48,14 +48,6 @@ namespace ContactApp.Module.Report.Application.Job
             CustomerReport customerReport = context?.Message ?? new CustomerReport() { Data = new List<CustomerReportData>() };
 
             var SaveEntity = new EntityReport("",customerReport.ReportName,DateTime.Now,DateTime.Now, (int)EnumCollection.ReportStatus.Wait,customerReport.DataJson,"", new List<EntityReportData>(), true);
-            //SaveEntity.ReportName = customerReport.ReportName;
-            //SaveEntity.CreateTime = DateTime.Now;
-            //SaveEntity.UpdateTime = DateTime.Now;
-            //SaveEntity.ReportStatus = (int)EnumCollection.ReportStatus.Wait; //Excell file then done this make done
-            //SaveEntity.DataJson = customerReport.DataJson;
-            //SaveEntity.Active = true;
-
-            //SaveEntity.Data = new List<EntityReportData>();
             foreach (var item in customerReport.Data)
             {
                 var saveDataEntity = new EntityReportData();
@@ -69,13 +61,8 @@ namespace ContactApp.Module.Report.Application.Job
 
             SaveEntity = _ReportService.Save(SaveEntity);
             SaveEntity.setFilePath("https://localhost:44397/api/Report/Export" + SaveEntity.ObjectId);
-            //SaveEntity.FilePath = "https://localhost:44397/api/Report/Export" + SaveEntity.ObjectId;
             SaveEntity.setReportStatus((int)EnumCollection.ReportStatus.Done);
-            //SaveEntity.ReportStatus = (int)EnumCollection.ReportStatus.Done; //Excell file then done this make done
-
             _ReportService.Save(SaveEntity);
-
-
         }
     }
     public interface ICreateReportJobService
