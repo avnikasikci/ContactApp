@@ -17,25 +17,7 @@ namespace ContactApp.Module.User.Application.Features.User.Queries
     {
         //public PageRequest PageRequest { get; set; }
         public string ObjectId { get; set; }
-        public class GetByIdUserQueryHandler : IRequestHandler<GetByIdUserQuery, UserDto>
-        {
-            private readonly IUserService _userService;
-            private readonly IMapper _mapper;
-
-            public GetByIdUserQueryHandler(IUserService userService, IMapper mapper)
-            {
-                _userService = userService;
-                _mapper = mapper;
-            }
-
-            public async Task<UserDto> Handle(GetByIdUserQuery request, CancellationToken cancellationToken)
-            {
-                var Entity = _userService.SelectById(request.ObjectId);
-                UserDto dto = _mapper.Map<UserDto>(Entity);
-
-                return dto;
-            }
-        }
+  
     }
 
 }

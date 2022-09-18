@@ -20,29 +20,9 @@ namespace ContactApp.Module.Report.Application.Features.Report.Command
         public DateTime CreateTime { get; set; }
         public DateTime UpdateTime { get; set; }
 
-        public class CreateReportCommanddHandler : IRequestHandler<CreateReportCommand, CreatedReportDto>
-        {
-            private readonly IReportService _ReportService;
-            private readonly IMapper _mapper;
-
-            public CreateReportCommanddHandler(IReportService ReportService, IMapper mapper)
-            {
-                _ReportService =ReportService;
-                _mapper = mapper;
-            }
-
-            public async Task<CreatedReportDto> Handle(CreateReportCommand request, CancellationToken cancellationToken)
-            {
-                EntityReport mappedReport = _mapper.Map<EntityReport>(request);
-                //mappedReport.Active = true;
-                mappedReport.setActive(true);
-                EntityReport createdReport = _ReportService.Save(mappedReport);
-                CreatedReportDto createdPersonDto = _mapper.Map<CreatedReportDto>(createdReport);
-
-                return createdPersonDto;
-
-            }
-        }
+   
     }
+
+   
 
 }

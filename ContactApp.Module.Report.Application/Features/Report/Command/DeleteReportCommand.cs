@@ -15,35 +15,7 @@ namespace ContactApp.Module.Report.Application.Features.Report.Command
     {
         public string ObjectId { get; set; }
 
-        public class DeleteReportCommandHandler : IRequestHandler<DeleteReportCommand, string>
-        {
-            private readonly IReportService _ReportService;
-            private readonly IMapper _mapper;
 
-            public DeleteReportCommandHandler(IReportService ReportService, IMapper mapper)
-            {
-                _ReportService = ReportService;
-                _mapper = mapper;
-            }
-
-            public async Task<string> Handle(DeleteReportCommand request, CancellationToken cancellationToken)
-            {
-                var Entity = _ReportService.SelectById(request.ObjectId);
-                if (Entity != null)
-                {
-                    //Entity.Active = false;
-                    Entity.setActive(false);
-                    _ReportService.Save(Entity);
-                    return Entity.ObjectId;
-
-                }
-                else
-                {
-                    return "Not Found User";
-                }
-
-            }
-        }
     }
-
+ 
 }
