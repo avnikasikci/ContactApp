@@ -14,12 +14,12 @@ namespace ContactApp.Module.Report.Application.Features.Report.Command.Handler
 {
     public class CreateReportCommanddHandler : IRequestHandler<CreateReportCommand, CreatedReportDto>
     {
-        private readonly IReportService _ReportService;
+        private readonly IReportService _reportService;
         private readonly IMapper _mapper;
 
-        public CreateReportCommanddHandler(IReportService ReportService, IMapper mapper)
+        public CreateReportCommanddHandler(IReportService reportService, IMapper mapper)
         {
-            _ReportService = ReportService;
+            _reportService = reportService;
             _mapper = mapper;
         }
 
@@ -28,7 +28,7 @@ namespace ContactApp.Module.Report.Application.Features.Report.Command.Handler
             EntityReport mappedReport = _mapper.Map<EntityReport>(request);
             //mappedReport.Active = true;
             mappedReport.setActive(true);
-            EntityReport createdReport = _ReportService.Save(mappedReport);
+            EntityReport createdReport = _reportService.Save(mappedReport);
             CreatedReportDto createdPersonDto = _mapper.Map<CreatedReportDto>(createdReport);
 
             return createdPersonDto;

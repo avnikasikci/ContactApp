@@ -12,37 +12,37 @@ namespace ContactApp.Module.Report.Application.Services
 
     public class ReportService : IReportService
     {
-        private readonly IMongoDbRepository<EntityReport> _ReportRepository;
+        private readonly IMongoDbRepository<EntityReport> _reportRepository;
         public ReportService(
             IMongoDbRepository<EntityReport> ReportRepository
 
 
             )
         {
-            _ReportRepository = ReportRepository;
+            _reportRepository = ReportRepository;
 
         }
 
         public IQueryable<EntityReport> GetAll()
         {
-            return _ReportRepository.All.Where(x => x.Active);
+            return _reportRepository.All.Where(x => x.Active);
         }
         public EntityReport Save(EntityReport entityPerson)
         {
             if (!string.IsNullOrEmpty(entityPerson.ObjectId))
             {
-                _ReportRepository.UpdateAsync(entityPerson, x => x.ObjectId == entityPerson.ObjectId);
+                _reportRepository.UpdateAsync(entityPerson, x => x.ObjectId == entityPerson.ObjectId);
             }
             else
             {
-                _ReportRepository.AddAsync(entity: entityPerson);
+                _reportRepository.AddAsync(entity: entityPerson);
             }
             return entityPerson;
         }
 
         public EntityReport SelectById(string objectId)
         {
-            var Entity = _ReportRepository.All.Where(x => x.ObjectId == objectId).FirstOrDefault();
+            var Entity = _reportRepository.All.Where(x => x.ObjectId == objectId).FirstOrDefault();
             return Entity;
         }
     }

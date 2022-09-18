@@ -14,18 +14,18 @@ namespace ContactApp.Module.Report.Application.Features.Report.Queries.Handler
 {
     public class GetListUserQueryHandler : IRequestHandler<GetListReportQuery, List<ReportDto>>
     {
-        private readonly IReportService _ReportSerivce;
+        private readonly IReportService _reportSerivce;
         private readonly IMapper _mapper;
 
         public GetListUserQueryHandler(IReportService reportService, IMapper mapper)
         {
-            _ReportSerivce = reportService;
+            _reportSerivce = reportService;
             _mapper = mapper;
         }
 
         public async Task<List<ReportDto>> Handle(GetListReportQuery request, CancellationToken cancellationToken)
         {
-            List<EntityReport> personList = _ReportSerivce.GetAll().ToList();
+            List<EntityReport> personList = _reportSerivce.GetAll().ToList();
             var mappedPersonListModel = (from m in personList
                                          select new ReportDto
                                          {

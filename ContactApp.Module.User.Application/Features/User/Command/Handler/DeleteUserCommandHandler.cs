@@ -15,24 +15,24 @@ namespace ContactApp.Module.User.Application.Features.User.Queries.Handler
 {
     public class DeleteUserCommandHandler : IRequestHandler<DeleteUserCommand, string>
     {
-        private readonly IUserService _UserService;
+        private readonly IUserService _userService;
         private readonly IMapper _mapper;
 
-        public DeleteUserCommandHandler(IUserService UserService, IMapper mapper)
+        public DeleteUserCommandHandler(IUserService userService, IMapper mapper)
         {
-            _UserService = UserService;
+            _userService = userService;
             _mapper = mapper;
         }
 
         public async Task<string> Handle(DeleteUserCommand request, CancellationToken cancellationToken)
         {
-            var Entity = _UserService.SelectById(request.ObjectId);
+            var Entity = _userService.SelectById(request.ObjectId);
             if (Entity != null)
             {
                 //Entity.Active = false;
                 Entity.setActive(false);
 
-                _UserService.Save(Entity);
+                _userService.Save(Entity);
                 return Entity.ObjectId;
 
             }

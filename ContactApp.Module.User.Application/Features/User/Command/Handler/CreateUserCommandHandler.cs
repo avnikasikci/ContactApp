@@ -15,14 +15,14 @@ namespace ContactApp.Module.User.Application.Features.User.Queries.Handler
 {
     public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, CreatedUserDto>
     {
-        private readonly IUserService _UserService;
-        private readonly IUserContactInformationService _UserContactInformationService;
+        private readonly IUserService _userService;
+        private readonly IUserContactInformationService _userContactInformationService;
         private readonly IMapper _mapper;
 
-        public CreateUserCommandHandler(IUserService UserService, IUserContactInformationService UserContactInformationService, IMapper mapper)
+        public CreateUserCommandHandler(IUserService userService, IUserContactInformationService userContactInformationService, IMapper mapper)
         {
-            _UserService = UserService;
-            _UserContactInformationService = UserContactInformationService;
+            _userService = userService;
+            _userContactInformationService = userContactInformationService;
             _mapper = mapper;
         }
 
@@ -32,7 +32,7 @@ namespace ContactApp.Module.User.Application.Features.User.Queries.Handler
             //EntityUser mappedPerson = _mapper.Map<EntityUser>(request);
             //mappedPerson.Active = true;
             //entityUser.setActive(true);
-            EntityUser createdPerson = _UserService.Save(entityUser);
+            EntityUser createdPerson = _userService.Save(entityUser);
 
             List<EntityUserContactInformation> entityUserContactInformation = (from m in request.ContactInformations
                                                                                select new EntityUserContactInformation
@@ -44,7 +44,7 @@ namespace ContactApp.Module.User.Application.Features.User.Queries.Handler
                                                                                }).ToList();
 
             entityUserContactInformation.ForEach(x => x.ObjectUserId = createdPerson.ObjectId);
-            await _UserContactInformationService.SaveSpecial(entityUserContactInformation);
+            await _userContactInformationService.SaveSpecial(entityUserContactInformation);
             //List<EntityUserContactInformation> entityContactInformation = await _UserContactInformationService.SaveSpecial(entityUserContactInformation);
             CreatedUserDto createdPersonDto = _mapper.Map<CreatedUserDto>(createdPerson);
             createdPersonDto.ContactInformations = request.ContactInformations;

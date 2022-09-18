@@ -13,18 +13,18 @@ namespace ContactApp.Module.Report.Application.Features.Report.Queries.Handler
 {
     public class GetByIdReportQueryHandler : IRequestHandler<GetByIdReportQuery, ReportDto>
     {
-        private readonly IReportService _ReportService;
+        private readonly IReportService _reportService;
         private readonly IMapper _mapper;
 
-        public GetByIdReportQueryHandler(IReportService ReportService, IMapper mapper)
+        public GetByIdReportQueryHandler(IReportService reportService, IMapper mapper)
         {
-            _ReportService = ReportService;
+            _reportService = reportService;
             _mapper = mapper;
         }
 
         public async Task<ReportDto> Handle(GetByIdReportQuery request, CancellationToken cancellationToken)
         {
-            var Entity = _ReportService.SelectById(request.ObjectId);
+            var Entity = _reportService.SelectById(request.ObjectId);
             ReportDto dto = _mapper.Map<ReportDto>(Entity);
 
             return dto;

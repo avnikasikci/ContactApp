@@ -1,5 +1,5 @@
 ﻿using ContactApp.Core.Application.SharedModels;
-using ContactApp.Core.Persistence.Repository; 
+using ContactApp.Core.Persistence.Repository;
 using ContactApp.Module.User.Application.Domain;
 using ContactApp.Module.User.Application.Enums;
 using ContactApp.Module.User.Application.Services.Interfaces;
@@ -14,30 +14,30 @@ namespace ContactApp.Module.User.Application.Services
 
     public class UserService : IUserService
     {
-        private readonly IMongoDbRepository<EntityUser> _UserRepository;
-        private readonly IUserContactInformationService _UserContactInformation;
+        private readonly IMongoDbRepository<EntityUser> _userRepository;
+        private readonly IUserContactInformationService _userContactInformation;
         public UserService(
-            IMongoDbRepository<EntityUser> PersonRepository,
-            IUserContactInformationService UserContactInformation
+            IMongoDbRepository<EntityUser> userRepository,
+            IUserContactInformationService userContactInformation
 
 
             )
         {
-            _UserRepository = PersonRepository;
-            _UserContactInformation = UserContactInformation;
+            _userRepository = userRepository;
+            _userContactInformation = userContactInformation;
 
         }
 
         public IQueryable<EntityUser> GetAll()
         {
-            return _UserRepository.All.Where(x => x.Active);
+            return _userRepository.All.Where(x => x.Active);
         }
 
-        public CustomerReport GetCustomerReport(string ReportName, DateTime AddedOnDate)
+        public CustomerReport GetCustomerReport(string reportName, DateTime addedOnDate)
         {
             var result = new CustomerReport();
-            result.ReportName = ReportName;
-            result.AddedOnDate = AddedOnDate;
+            result.ReportName = reportName;
+            result.AddedOnDate = addedOnDate;
             result.Data = new List<CustomerReportData>();
 
             var allPerson = this.GetAll();
@@ -58,29 +58,29 @@ namespace ContactApp.Module.User.Application.Services
 
 
             var resultQuery = (from person in allPerson.ToList()
-                               join personCi in _UserContactInformation.GetAll().ToList() on person.ObjectId equals personCi.ObjectUserId
+                               join personCi in _userContactInformation.GetAll().ToList() on person.ObjectId equals personCi.ObjectUserId
                                where personCi.InformationType == (int)EnumCollection.ConcactType.Localation
                                group personCi by personCi.InformationDesc into personConcantList
                                select new CustomerReportData
                                {
                                    Location = personConcantList.Key,
-                                   PhoneCount = (from personCi in _UserContactInformation.GetAll().ToList() //personConcact connection
-                                                             join person in allPerson on personCi.ObjectUserId equals person.ObjectId // join user db
-                                                             where personCi.InformationType == (int)EnumCollection.ConcactType.Phone
-                                                                 && (from personCi in _UserContactInformation.GetAll().ToList()
-                                                                     where
-                                                                           personCi.ObjectUserId == person.ObjectId && personCi.InformationDesc == personConcantList.Key
-                                                                     select personCi).Any()
-                                                             select personCi).Count().ToString(),
+                                   PhoneCount = (from personCi in _userContactInformation.GetAll().ToList() //personConcact connection
+                                                 join person in allPerson on personCi.ObjectUserId equals person.ObjectId // join user db
+                                                 where personCi.InformationType == (int)EnumCollection.ConcactType.Phone
+                                                     && (from personCi in _userContactInformation.GetAll().ToList()
+                                                         where
+                                                               personCi.ObjectUserId == person.ObjectId && personCi.InformationDesc == personConcantList.Key
+                                                         select personCi).Any()
+                                                 select personCi).Count().ToString(),
                                    UserCount = personConcantList.Count().ToString(),
-                                   MailCount = (from personCi in _UserContactInformation.GetAll().ToList() //personConcact connection
-                                                          join person in allPerson on personCi.ObjectUserId equals person.ObjectId // join user db
-                                                          where personCi.InformationType == (int)EnumCollection.ConcactType.Mail
-                                                              && (from personCi in _UserContactInformation.GetAll().ToList()
-                                                                  where
-                                                                        personCi.ObjectUserId == person.ObjectId && personCi.InformationDesc == personConcantList.Key
-                                                                  select personCi).Any()
-                                                          select personCi).Count().ToString(),
+                                   MailCount = (from personCi in _userContactInformation.GetAll().ToList() //personConcact connection
+                                                join person in allPerson on personCi.ObjectUserId equals person.ObjectId // join user db
+                                                where personCi.InformationType == (int)EnumCollection.ConcactType.Mail
+                                                    && (from personCi in _userContactInformation.GetAll().ToList()
+                                                        where
+                                                              personCi.ObjectUserId == person.ObjectId && personCi.InformationDesc == personConcantList.Key
+                                                        select personCi).Any()
+                                                select personCi).Count().ToString(),
 
                                }).ToList();
 
@@ -94,37 +94,19 @@ namespace ContactApp.Module.User.Application.Services
         {
             if (!string.IsNullOrEmpty(entityPerson.ObjectId))
             {
-                _UserRepository.UpdateAsync(entityPerson, x => x.ObjectId == entityPerson.ObjectId);
+                _userRepository.UpdateAsync(entityPerson, x => x.ObjectId == entityPerson.ObjectId);
 
             }
             else
             {
-                _UserRepository.AddAsync(entity: entityPerson);
+                _userRepository.AddAsync(entity: entityPerson);
             }
-
-            //entityPerson.ContactInformations.ToList().ForEach(x => x.ObjectUserId = entityPerson.ObjectId);
-            //entityPerson.ContactInformations= _UserContactInformation.SaveMulti(entityPerson.ContactInformations.ToList());
-
-            //foreach (var item in entityPerson.ContactInformations.ToList())
-            //{
-            //    if (!string.IsNullOrEmpty(item.ObjectId))
-            //    {
-            //        _ContactInformationRepository.UpdateAsync(item, x => x.ObjectId == item.ObjectId);
-            //    }
-            //    else
-            //    {
-            //        _ContactInformationRepository.AddAsync(entity: item);
-            //    }
-
-
-            //}
-            ////_ContactInformationRepository.AddRangeAsync(entityPerson.ContactInformations);
             return entityPerson;
         }
 
         public EntityUser SelectById(string objectId)
         {
-            var Entity = _UserRepository.All.Where(x => x.ObjectId == objectId).FirstOrDefault();
+            var Entity = _userRepository.All.Where(x => x.ObjectId == objectId).FirstOrDefault();
             return Entity;
         }
     }
