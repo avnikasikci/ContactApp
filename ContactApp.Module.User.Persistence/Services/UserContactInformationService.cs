@@ -62,11 +62,11 @@ namespace ContactApp.Module.User.Application.Services
             var Entity = _ContactInformationRepository.All.Where(x => x.ObjectId == objectId).FirstOrDefault();
             return Entity;
         }
-        public void Delete(EntityUserContactInformation objectEntity)
-        {
-            //var entity = this.SelectById(objectId);
-            _ContactInformationRepository.DeleteAsync(objectEntity);
-        }
+        //public void Delete(EntityUserContactInformation objectEntity)
+        //{
+        //    //var entity = this.SelectById(objectId);
+        //    _ContactInformationRepository.DeleteAsync(objectEntity);
+        //}
 
         public Task<bool> SaveSpecial(List<EntityUserContactInformation> DataList)
         {
