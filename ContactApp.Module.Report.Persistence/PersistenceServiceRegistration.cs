@@ -27,8 +27,6 @@ namespace ContactApp.Module.Report.Persistence
                 options.Database = configuration
                     .GetSection(nameof(MongoDbSettings) + ":" + MongoDbSettings.DatabaseValue).Value;
             });
-            //services.Configure<MongoDbSettings>(configuration.GetSection(nameof(MongoDbSettings)));
-
             services.AddSingleton<IMongoDbSettings>(
                      sp => sp.GetRequiredService<IOptions<MongoDbSettings>>().Value);
 

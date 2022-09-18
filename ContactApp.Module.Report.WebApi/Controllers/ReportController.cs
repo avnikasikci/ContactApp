@@ -33,7 +33,7 @@ namespace ContactApp.Module.Report.WebApi.Controllers
             _ExportService = ExportService;
         }
         //[HttpGet("export")]
-        [HttpGet("Export{ObjectId}")]
+        [HttpGet("export/{ObjectId}")]
 
         public async Task<IActionResult> Export(string ObjectId)
         {
@@ -87,7 +87,7 @@ namespace ContactApp.Module.Report.WebApi.Controllers
             string result = await Mediator.Send(deleteUserCommand);
             return Created("", result);
         }
-        [HttpGet("{ObjectId}")]
+        [HttpGet("{objectId}")]
         public async Task<IActionResult> GetById(string ObjectId)
         {
             GetByIdReportQuery getByIdUserQuery = new() { ObjectId = ObjectId };
