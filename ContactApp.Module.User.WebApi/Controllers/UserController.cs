@@ -43,7 +43,7 @@ namespace ContactApp.Module.User.WebApi.Controllers
         [HttpGet("{ObjectId}")]
         public async Task<IActionResult> GetById(string ObjectId)
         {
-            GetByIdUserQuery getByIdUserQuery = new() { ObjectId = ObjectId };
+            GetByIdUserQuery getByIdUserQuery = new() { id = ObjectId };
 
             UserDto result = await Mediator.Send(getByIdUserQuery);
             return Created("", result);

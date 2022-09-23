@@ -1,8 +1,12 @@
 ﻿using ContactApp.Core.Application.Infrastructure.ImportExport;
 using ContactApp.Core.Persistence.DbProvider;
 using ContactApp.Core.Persistence.Repository;
+using ContactApp.Module.Report.Application.Repository;
 using ContactApp.Module.Report.Application.Services;
 using ContactApp.Module.Report.Application.Services.Interfaces;
+using ContactApp.Module.Report.Persistence.Context;
+using ContactApp.Module.Report.Persistence.Repostiory;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
@@ -27,11 +31,18 @@ namespace ContactApp.Module.Report.Persistence
                 options.Database = configuration
                     .GetSection(nameof(MongoDbSettings) + ":" + MongoDbSettings.DatabaseValue).Value;
             });
+
+            services.AddDbContext<PGDataReportContext>(opt =>
+            {
+                opt.UseNpgsql(configuration.GetConnectionString("Default"));
+            });
+
             services.AddSingleton<IMongoDbSettings>(
                      sp => sp.GetRequiredService<IOptions<MongoDbSettings>>().Value);
 
             services.AddTransient(typeof(IMongoDbRepository<>), typeof(MongoDbRepository<>));
             services.AddScoped<IReportService, ReportService>();
+            services.AddScoped<IReportRepository, ReportRepository>();
             services.AddScoped<IExportService, XlsxExportService>();
 
             return services;

@@ -9,7 +9,7 @@ namespace ContactApp.Module.Report.Application.Features.Report.Dtos
 {
     public class ReportDto
     {
-        public string ObjectId { get; set; }
+        public int Id { get; set; }
         public string ReportName { get; set; }
 
         public DateTime CreateTime { get; set; }

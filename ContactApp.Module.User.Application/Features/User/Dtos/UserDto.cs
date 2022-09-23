@@ -9,7 +9,7 @@ namespace ContactApp.Module.User.Application.Features.User.Dtos
 {
     public class UserDto
     {
-        public string ObjectId { get; set; }
+        public int Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string CompanyName { get; set; }

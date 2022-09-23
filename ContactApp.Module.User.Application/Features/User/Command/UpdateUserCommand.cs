@@ -15,7 +15,7 @@ namespace ContactApp.Module.User.Application.Features.User.Command
 
     public partial class UpdateUserCommand : IRequest<UpdateUserDto>
     {
-        public string ObjectId { get; set; }
+        public string Id { get; set; }
 
         public string FirstName { get; set; }
         public string LastName { get; set; }

@@ -1,6 +1,9 @@
 using ContactApp.Module.Report.Application;
 using ContactApp.Module.Report.Persistence;
+using ContactApp.Module.Report.Persistence.Context;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
+
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -42,12 +45,23 @@ namespace ContactApp.Module.Report.WebApi
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "ContactApp.Module.Report.WebApi", Version = "v1" });
             });
-       
+
+    
+
+        }
+        private void InitializeDatabase(IApplicationBuilder app)
+        {
+            using (var scope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
+            {
+                scope.ServiceProvider.GetRequiredService<PGDataReportContext>().Database.Migrate();
+            }
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            InitializeDatabase(app);
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

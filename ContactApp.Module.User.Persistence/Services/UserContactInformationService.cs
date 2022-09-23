@@ -2,6 +2,7 @@
 using ContactApp.Core.Persistence.Repository;
 using ContactApp.Module.User.Application.Domain;
 using ContactApp.Module.User.Application.Enums;
+using ContactApp.Module.User.Application.Repository;
 using ContactApp.Module.User.Application.Services.Interfaces;
 using MongoDB.Driver;
 using System;
@@ -15,10 +16,11 @@ namespace ContactApp.Module.User.Application.Services
 
     public class UserContactInformationService : IUserContactInformationService
     {
-        private readonly IMongoDbRepository<EntityUserContactInformation> _contactInformationRepository;
+        //private readonly IMongoDbRepository<EntityUserContactInformation> _contactInformationRepository;
+        private readonly IUserContactInformationRepository _contactInformationRepository;
         public UserContactInformationService(
 
-            IMongoDbRepository<EntityUserContactInformation> contactInformationRepository
+            IUserContactInformationRepository contactInformationRepository
 
 
             )
@@ -30,71 +32,64 @@ namespace ContactApp.Module.User.Application.Services
 
         public IQueryable<EntityUserContactInformation> GetAll()
         {
-            return _contactInformationRepository.All;
+            return _contactInformationRepository.GetAll();
         }
-        public List<EntityUserContactInformation> SaveMultible(List<EntityUserContactInformation> entityListContact)
-        {
-            foreach (var item in entityListContact)
-            {
-                this.Save(item);
-            }
-            return entityListContact;
-        }
-
 
         public EntityUserContactInformation Save(EntityUserContactInformation entityPerson)
         {
-            if (!string.IsNullOrEmpty(entityPerson.ObjectId))
-            {
-                _contactInformationRepository.UpdateAsync(entityPerson, x => x.ObjectId == entityPerson.ObjectId);
-
-            }
-            else
-            {
-                _contactInformationRepository.AddAsync(entity: entityPerson);
-            }
-
-            return entityPerson;
+            return _contactInformationRepository.Save(entityPerson);
         }
 
         public EntityUserContactInformation SelectById(string objectId)
         {
-            var entity = _contactInformationRepository.All.Where(x => x.ObjectId == objectId).FirstOrDefault();
-            return entity;
+            return _contactInformationRepository.SelectById(objectId);
         }
-        public Task<bool> SaveSpecial(List<EntityUserContactInformation> dataList)
+        public async Task AddBulkDataAsync(List<EntityUserContactInformation> dataList)
         {
-            // create a filter
-            var userIdFilter = Builders<EntityUserContactInformation>.Filter
-                .And(
-                    Builders<EntityUserContactInformation>.Filter.Eq(person => person.ObjectUserId, dataList.FirstOrDefault().ObjectUserId)
-                    );
-            var personsDeleteResult = _contactInformationRepository.DeleteManyAsync(userIdFilter);
+            await _contactInformationRepository.AddBulkDataAsync(dataList);
 
+        }
+        public async Task UpdateBulkDataAsync(List<EntityUserContactInformation> dataList)
+        {
+            await _contactInformationRepository.UpdateBulkDataAsync(dataList);
 
-            var listWrites = new List<WriteModel<EntityUserContactInformation>>();
-            var insertList = dataList.Where(x => x.ObjectId == "" || x.ObjectId == null).ToList();
-            var updateList = dataList.Where(x => x.ObjectId != null && x.ObjectId != null && x.ObjectId.Length == 24).ToList();
+        }
+        public async Task DeleteBulkDataAsync(List<EntityUserContactInformation> dataList)
+        {
+            await _contactInformationRepository.DeleteBulkDataAsync(dataList);
 
-            if (insertList != null && insertList.Count > 0)
+        }
+        public async Task<bool> SaveSpecial(List<EntityUserContactInformation> dataList)
+        {
+
+            var deleteRecords = this.GetAll().Where(x => x.UserId == dataList.FirstOrDefault().UserId).ToList();
+            foreach (var item in deleteRecords)
             {
-                foreach (var _Insert in insertList)
-                {
-                    listWrites.Add(new InsertOneModel<EntityUserContactInformation>(_Insert));
-                }
+                _contactInformationRepository.Delete(item);
             }
-            if (updateList != null && updateList.Count > 0)
+    
+            //if (deleteRecords != null && deleteRecords.Count > 0)
+            //    await this.DeleteBulkDataAsync(deleteRecords);
+
+            var insertRecord = dataList.Where(x => x.Id.ToString() == "" || x.Id == null || x.Id <= 0).ToList();
+            foreach (var item in insertRecord)
             {
-                foreach (var _Update in updateList)
-                {
-                    var upsertOne = new ReplaceOneModel<EntityUserContactInformation>(
-                        Builders<EntityUserContactInformation>.Filter.Where(x => x.ObjectId == _Update.ObjectId), _Update)
-                    { IsUpsert = true };
-                    listWrites.Add(upsertOne);
-                }
+                _contactInformationRepository.Add(item);
+
             }
-            var result = _contactInformationRepository.AddRangeModelAsync(listWrites);
-            return result;
+            //if (insertRecord != null && insertRecord.Count > 0)
+            //    await this.AddBulkDataAsync(insertRecord);
+
+            var updateRecord = dataList.Where(x => x.Id != null && x.Id > 0).ToList();
+            foreach (var item in updateRecord)
+            {
+                _contactInformationRepository.Update(item);
+
+            }
+            //if (updateRecord != null && updateRecord.Count > 0)
+            //    await this.UpdateBulkDataAsync(updateRecord);
+
+            return true;
         }
     }
 }

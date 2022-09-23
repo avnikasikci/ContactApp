@@ -12,6 +12,6 @@ namespace ContactApp.Module.Report.Application.Services.Interfaces
     {
         IQueryable<EntityReport> GetAll();
         EntityReport Save(EntityReport EntityReport);
-        EntityReport SelectById(string objectId);
+        EntityReport SelectById(int id);
     }
 }

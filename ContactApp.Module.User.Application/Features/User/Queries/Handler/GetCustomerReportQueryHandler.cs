@@ -12,28 +12,22 @@ using System.Threading.Tasks;
 
 namespace ContactApp.Module.User.Application.Features.User.Queries.Handler
 {
-    public class GetCustomerReportQuery : IRequest<CustomerReport>
+
+    public class GetCustomerReportQueryHandler : IRequestHandler<GetCustomerReportQuery, CustomerReport>
     {
-        //public PageRequest PageRequest { get; set; }
-        public string ReportName { get; set; }
+        private readonly IUserService _userService;
+        private readonly IMapper _mapper;
 
-
-        public class GetCustomerReportQueryHandler : IRequestHandler<GetCustomerReportQuery, CustomerReport>
+        public GetCustomerReportQueryHandler(IUserService userService, IMapper mapper)
         {
-            private readonly IUserService _userService;
-            private readonly IMapper _mapper;
+            _userService = userService;
+            _mapper = mapper;
+        }
 
-            public GetCustomerReportQueryHandler(IUserService userService, IMapper mapper)
-            {
-                _userService = userService;
-                _mapper = mapper;
-            }
-
-            public async Task<CustomerReport> Handle(GetCustomerReportQuery request, CancellationToken cancellationToken)
-            {
-                var report = _userService.GetCustomerReport(request.ReportName, DateTime.Now);
-                return report;
-            }
+        public async Task<CustomerReport> Handle(GetCustomerReportQuery request, CancellationToken cancellationToken)
+        {
+            var report = _userService.GetCustomerReport(request.ReportName, DateTime.Now);
+            return report;
         }
     }
 }

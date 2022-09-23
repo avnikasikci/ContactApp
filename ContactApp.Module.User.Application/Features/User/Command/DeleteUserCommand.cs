@@ -15,7 +15,7 @@ namespace ContactApp.Module.User.Application.Features.User.Command
 
     public partial class DeleteUserCommand : IRequest<string>
     {
-        public string ObjectId { get; set; }
+        public string Id { get; set; }
 
     }
 
