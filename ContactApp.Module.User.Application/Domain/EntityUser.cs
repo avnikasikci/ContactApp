@@ -51,6 +51,10 @@ namespace ContactApp.Module.User.Application.Domain
             //this.ContactDetails = new();
             this.Active = active;
         }
+        public void setFirstName(string firstName)
+        {
+            this.FirstName = firstName;
+        }
         public void setActive(bool active)
         {
             this.Active = active;

@@ -92,9 +92,9 @@ namespace ContactApp.Module.User.Application.Services
             return _userRepository.Save(entityPerson);
         }
 
-        public EntityUser SelectById(string objectId)
+        public EntityUser SelectById(int Id)
         {
-            return _userRepository.SelectById(objectId);
+            return _userRepository.SelectById(Id);
         }
     }
 }

@@ -14,7 +14,7 @@ namespace ContactApp.Module.User.Application.Services.Interfaces
         EntityUser Save(EntityUser entityPerson);
         EntityUser Add(EntityUser entityPerson);
         EntityUser Update(EntityUser entityPerson);
-        EntityUser SelectById(string objectId);
+        EntityUser SelectById(int id);
         CustomerReport GetCustomerReport(string ReportName,DateTime AddedOnDate);
     }
 }

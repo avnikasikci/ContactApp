@@ -13,6 +13,6 @@ namespace ContactApp.Module.User.Application.Repository
         EntityUser Save(EntityUser entityPerson);
         EntityUser Add(EntityUser entityPerson);
         EntityUser Update(EntityUser entityPerson);
-        EntityUser SelectById(string objectId);
+        EntityUser SelectById(int Id);
     }
 }

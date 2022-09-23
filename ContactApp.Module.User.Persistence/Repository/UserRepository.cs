@@ -59,9 +59,9 @@ namespace ContactApp.Module.User.Persistence.Repository
             return entityPerson;
         }
 
-        public EntityUser SelectById(string objectId)
+        public EntityUser SelectById(int Id)
         {
-            var Entity = _context.EntityUsers.FirstOrDefault(x => x.Id.ToString() == objectId);
+            var Entity = _context.EntityUsers.FirstOrDefault(x => x.Id == Id);
             return Entity;
         }
 
