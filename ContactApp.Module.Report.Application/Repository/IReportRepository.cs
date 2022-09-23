@@ -14,5 +14,6 @@ namespace ContactApp.Module.Report.Application.Repository
         EntityReport Add(EntityReport EntityReport);
         EntityReport Update(EntityReport EntityReport);
         EntityReport SelectById(int id);
+        void Delete(EntityReport entityPerson);
     }
 }

@@ -23,15 +23,6 @@ namespace ContactApp.Module.Report.Application.Consumer
         public async Task Consume(ConsumeContext<CustomerReport> context)
         {
             _ReportService.StartJob(context);
-
-
-            //var cancellationToken = new CancellationTokenSource().Token;
-            //Task.Run(async () =>
-            //{
-            //    _ReportService.StartJob(context);
-            //}, cancellationToken);
-
-
         }
 
     }

@@ -17,9 +17,6 @@ namespace ContactApp.Module.Report.Persistence.Repostiory
         {
             _context = context;
         }
-
-
-
         public IQueryable<EntityReport> GetAll()
         {
             return _context.EntityReports.AsQueryable().Where(x => x.Active);
@@ -51,6 +48,10 @@ namespace ContactApp.Module.Report.Persistence.Repostiory
             }
             _context.SaveChanges();
             return entityPerson;
+        }
+        public void Delete(EntityReport entityPerson)
+        {
+            _context.EntityReports.Remove(entityPerson);
         }
 
         public EntityReport SelectById(int id)

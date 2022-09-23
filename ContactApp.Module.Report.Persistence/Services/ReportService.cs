@@ -1,4 +1,4 @@
-﻿using ContactApp.Core.Persistence.Repository;
+﻿
 using ContactApp.Module.Report.Application.Domain;
 using ContactApp.Module.Report.Application.Repository;
 using ContactApp.Module.Report.Application.Services.Interfaces;

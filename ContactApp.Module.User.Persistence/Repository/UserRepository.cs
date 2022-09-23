@@ -1,15 +1,7 @@
-﻿using ContactApp.Core.Application.SharedModels;
-using ContactApp.Core.Persistence.Repository;
-using ContactApp.Module.User.Application.Domain;
-using ContactApp.Module.User.Application.Enums;
+﻿using ContactApp.Module.User.Application.Domain;
 using ContactApp.Module.User.Application.Repository;
-using ContactApp.Module.User.Application.Services.Interfaces;
 using ContactApp.Module.User.Persistence.Context;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ContactApp.Module.User.Persistence.Repository
 {

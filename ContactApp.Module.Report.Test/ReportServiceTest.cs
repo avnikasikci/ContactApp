@@ -72,9 +72,9 @@ namespace ContactApp.Module.Report.Test
             var resultEntity = reportRepository.Save(saveEntity);
             var saveId = resultEntity.Id;
             var entity = reportRepository.SelectById(saveId);
-
+            
             // Assert
-            Assert.True(resultEntity.Id == entity.Id);
+            Assert.True(resultEntity.Id == entity.Id);                    
 
         }
         [Fact]
