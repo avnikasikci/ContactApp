@@ -1,8 +1,9 @@
 ﻿using ContactApp.Core.Application.Core;
-using MongoDB.Bson;
-using MongoDB.Bson.Serialization.Attributes;
+using ContactApp.Core.Application.Utility;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,43 +12,51 @@ namespace ContactApp.Module.Report.Application.Domain
 {
     public class EntityReport : BaseEntity
     {
-        [BsonId]
-        [BsonRepresentation(BsonType.ObjectId)]
-        public string ObjectId { get; private set; }
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int Id { get; set; }
+
         public string ReportName { get; private set; }
         public DateTime CreateTime { get; private set; }
         public DateTime UpdateTime { get; private set; }
         public int ReportStatus { get; private set; }
         public string DataJson { get; private set; }
         public string FilePath { get; private set; }
-        public List<EntityReportData> Data { get; private set; }
+        [NotMapped]
+        public virtual IList<EntityReportData> Data
+        {
+            get => (UtilityJson.JsonDeserialize<IList<EntityReportData>>(DataJson));
+            set { DataJson = UtilityJson.JsonSerialize(value); }
+        }
         public bool Active { get; private set; }
 
-        //public string ObjectId { get; set; }
-        //public string ReportName { get; set; }
-        //public DateTime CreateTime { get; set; }
-        //public DateTime UpdateTime { get; set; }
-        //public int ReportStatus { get; set; }
-        //public string DataJson { get; set; }        
-        //public string FilePath { get; set; }
-        //public List<EntityReportData> Data { get; set; }
-        //public bool Active { get; set; }
-        public EntityReport(string objectId, string reportName, DateTime createTime, DateTime updateTime, int reportStatus, string dataJson, string filePath, List<EntityReportData> data, bool active)
+        protected EntityReport()
         {
-            this.ObjectId = objectId;
+
+        }
+
+
+        public EntityReport(int id, string reportName, DateTime createTime, DateTime updateTime, int reportStatus, string dataJson, string filePath, List<EntityReportData> data, bool active = true)
+        {
+            this.Id = id;
             this.ReportName = reportName;
             this.CreateTime = createTime;
             this.UpdateTime = updateTime;
             this.ReportStatus = reportStatus;
             this.DataJson = dataJson;
             this.FilePath = filePath;
-            this.Data = data;
+            this.Data = data ?? new();
             this.Active = active;
         }
-        public void setObjectId(string objectId)
-        {
-            this.ObjectId = objectId;
 
+        public void setId(int id)
+        {
+            this.Id = id;
+        }
+        //
+        public void setReportName(string ReportName)
+        {
+            this.ReportName = ReportName;
         }
         public void setReportStatus(int reportStatus)
         {

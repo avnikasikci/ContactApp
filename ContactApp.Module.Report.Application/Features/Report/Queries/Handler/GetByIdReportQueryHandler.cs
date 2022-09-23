@@ -24,7 +24,9 @@ namespace ContactApp.Module.Report.Application.Features.Report.Queries.Handler
 
         public async Task<ReportDto> Handle(GetByIdReportQuery request, CancellationToken cancellationToken)
         {
-            var Entity = _reportService.SelectById(request.ObjectId);
+            var result = 0;
+            int.TryParse(request.id, out result);
+            var Entity = _reportService.SelectById(result);
             ReportDto dto = _mapper.Map<ReportDto>(Entity);
 
             return dto;

@@ -22,13 +22,15 @@ namespace ContactApp.Module.User.Application.Features.User.Queries.Handler
         public UpdateUserCommandHandler(IUserService userService, IUserContactInformationService userContactInformationService, IMapper mapper)
         {
             _userService = userService;
-            _userContactInformationService = userContactInformationService;            
+            _userContactInformationService = userContactInformationService;
             _mapper = mapper;
         }
 
         public async Task<UpdateUserDto> Handle(UpdateUserCommand request, CancellationToken cancellationToken)
         {
-            EntityUser entityUser = new EntityUser(request.ObjectId, request.FirstName, request.LastName, request.CompanyName, true);
+            int Id = 0;
+            int.TryParse(request.Id, out Id);
+            EntityUser entityUser = new EntityUser(Id ,request.FirstName, request.LastName, request.CompanyName, true);
 
             //EntityUser mappedPerson = _mapper.Map<EntityUser>(request);
             ////mappedPerson.Active = true;
@@ -40,11 +42,11 @@ namespace ContactApp.Module.User.Application.Features.User.Queries.Handler
                                                                                {
                                                                                    InformationDesc = m.InformationDesc,
                                                                                    InformationType = m.InformationType,
-                                                                                   ObjectUserId = createdPerson.ObjectId,
+                                                                                   UserId = createdPerson.Id,
 
                                                                                }).ToList();
 
-            entityUserContactInformation.ForEach(x => x.ObjectUserId = createdPerson.ObjectId);
+            entityUserContactInformation.ForEach(x => x.UserId = createdPerson.Id);
             await _userContactInformationService.SaveSpecial(entityUserContactInformation);
             //List<EntityUserContactInformation> entityContactInformation =await  _UserContactInformationService.SaveSpecial(entityUserContactInformation);
 

@@ -24,7 +24,9 @@ namespace ContactApp.Module.User.Application.Features.User.Queries.Handler
 
         public async Task<UserDto> Handle(GetByIdUserQuery request, CancellationToken cancellationToken)
         {
-            var Entity = _userService.SelectById(request.ObjectId);
+            int id = 0;
+            int.TryParse(request.id, out id);
+            var Entity = _userService.SelectById(id);
             UserDto dto = _mapper.Map<UserDto>(Entity);
 
             return dto;

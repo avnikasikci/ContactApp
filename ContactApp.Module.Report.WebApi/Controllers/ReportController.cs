@@ -38,7 +38,7 @@ namespace ContactApp.Module.Report.WebApi.Controllers
         public async Task<IActionResult> Export(string ObjectId)
         {
 
-            GetByIdReportQuery getByIdUserQuery = new() { ObjectId = ObjectId };
+            GetByIdReportQuery getByIdUserQuery = new() { id = ObjectId };
 
             ReportDto result = await Mediator.Send(getByIdUserQuery) ?? new ReportDto();
             result.Data = (result.Data != null) ? result.Data : new List<EntityReportData>();
@@ -90,7 +90,7 @@ namespace ContactApp.Module.Report.WebApi.Controllers
         [HttpGet("{objectId}")]
         public async Task<IActionResult> GetById(string ObjectId)
         {
-            GetByIdReportQuery getByIdUserQuery = new() { ObjectId = ObjectId };
+            GetByIdReportQuery getByIdUserQuery = new() { id = ObjectId };
 
             ReportDto result = await Mediator.Send(getByIdUserQuery);
             return Created("", result);

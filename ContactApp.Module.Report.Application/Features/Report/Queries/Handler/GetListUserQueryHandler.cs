@@ -29,7 +29,7 @@ namespace ContactApp.Module.Report.Application.Features.Report.Queries.Handler
             var mappedPersonListModel = (from m in personList
                                          select new ReportDto
                                          {
-                                             ObjectId = m.ObjectId,
+                                             Id = m.Id,
                                              ReportName = m.ReportName,
                                              Active = m.Active,
                                              CreateTime = m.CreateTime,

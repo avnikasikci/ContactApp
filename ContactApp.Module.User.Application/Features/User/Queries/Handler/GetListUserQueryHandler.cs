@@ -32,12 +32,12 @@ namespace ContactApp.Module.User.Application.Features.User.Queries.Handler
 
                                          select new UserDto
                                          {
-                                             ObjectId = m.ObjectId,
+                                             Id = m.Id,
                                              Active = m.Active,
                                              CompanyName = m.CompanyName,
                                              FirstName = m.FirstName,
                                              LastName = m.LastName,
-                                             ContactInformations = _UserContactInformationService.GetAll().Where(x => x.ObjectUserId == m.ObjectId).ToList().Select(x => new UserContactInformationDto
+                                             ContactInformations = _UserContactInformationService.GetAll().Where(x => x.UserId == m.Id).ToList().Select(x => new UserContactInformationDto
                                              {
                                                  InformationType = x.InformationType,
                                                  InformationDesc = x.InformationDesc

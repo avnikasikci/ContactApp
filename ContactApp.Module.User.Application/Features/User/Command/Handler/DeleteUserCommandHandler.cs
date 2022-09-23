@@ -26,14 +26,16 @@ namespace ContactApp.Module.User.Application.Features.User.Queries.Handler
 
         public async Task<string> Handle(DeleteUserCommand request, CancellationToken cancellationToken)
         {
-            var Entity = _userService.SelectById(request.ObjectId);
+            int id = 0;
+            int.TryParse(request.Id, out id);
+            var Entity = _userService.SelectById(id);
             if (Entity != null)
             {
                 //Entity.Active = false;
                 Entity.setActive(false);
 
                 _userService.Save(Entity);
-                return Entity.ObjectId;
+                return Entity.Id.ToString();
 
             }
             else

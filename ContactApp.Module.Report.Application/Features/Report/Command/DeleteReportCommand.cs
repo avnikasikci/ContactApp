@@ -13,7 +13,7 @@ namespace ContactApp.Module.Report.Application.Features.Report.Command
 
     public partial class DeleteReportCommand : IRequest<string>
     {
-        public string ObjectId { get; set; }
+        public string id { get; set; }
 
 
     }

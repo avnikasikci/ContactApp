@@ -1,5 +1,6 @@
 ﻿using ContactApp.Core.Persistence.Repository;
 using ContactApp.Module.Report.Application.Domain;
+using ContactApp.Module.Report.Application.Repository;
 using ContactApp.Module.Report.Application.Services.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -12,9 +13,9 @@ namespace ContactApp.Module.Report.Application.Services
 
     public class ReportService : IReportService
     {
-        private readonly IMongoDbRepository<EntityReport> _reportRepository;
+        private readonly IReportRepository _reportRepository;
         public ReportService(
-            IMongoDbRepository<EntityReport> ReportRepository
+            IReportRepository ReportRepository
 
 
             )
@@ -25,25 +26,27 @@ namespace ContactApp.Module.Report.Application.Services
 
         public IQueryable<EntityReport> GetAll()
         {
-            return _reportRepository.All.Where(x => x.Active);
+            return _reportRepository.GetAll();
+        }
+        public EntityReport Add(EntityReport entityPerson)
+        {
+
+            return _reportRepository.Add(entityPerson);
+        }
+        public EntityReport Update(EntityReport entityPerson)
+        {
+
+            return _reportRepository.Update(entityPerson);
         }
         public EntityReport Save(EntityReport entityPerson)
         {
-            if (!string.IsNullOrEmpty(entityPerson.ObjectId))
-            {
-                _reportRepository.UpdateAsync(entityPerson, x => x.ObjectId == entityPerson.ObjectId);
-            }
-            else
-            {
-                _reportRepository.AddAsync(entity: entityPerson);
-            }
-            return entityPerson;
+
+            return _reportRepository.Save(entityPerson);
         }
 
-        public EntityReport SelectById(string objectId)
+        public EntityReport SelectById(int id)
         {
-            var Entity = _reportRepository.All.Where(x => x.ObjectId == objectId).FirstOrDefault();
-            return Entity;
+            return _reportRepository.SelectById(id);
         }
     }
 }

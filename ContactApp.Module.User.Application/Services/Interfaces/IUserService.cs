@@ -12,7 +12,9 @@ namespace ContactApp.Module.User.Application.Services.Interfaces
     {
         IQueryable<EntityUser> GetAll();
         EntityUser Save(EntityUser entityPerson);
-        EntityUser SelectById(string objectId);
+        EntityUser Add(EntityUser entityPerson);
+        EntityUser Update(EntityUser entityPerson);
+        EntityUser SelectById(int id);
         CustomerReport GetCustomerReport(string ReportName,DateTime AddedOnDate);
     }
 }

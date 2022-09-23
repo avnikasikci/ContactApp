@@ -15,8 +15,7 @@ namespace ContactApp.Module.User.Application.Features.User.Queries
 
     public class GetByIdUserQuery : IRequest<UserDto>
     {
-        //public PageRequest PageRequest { get; set; }
-        public string ObjectId { get; set; }
+        public string id { get; set; }
   
     }
 

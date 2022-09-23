@@ -16,6 +16,8 @@ using System.Reflection;
 using System.Threading.Tasks;
 using MediatR;
 using ContactApp.Module.User.Persistence;
+using ContactApp.Module.User.Persistence.Context;
+using Microsoft.EntityFrameworkCore;
 
 namespace ContactApp.Module.User.WebApi
 {
@@ -44,10 +46,19 @@ namespace ContactApp.Module.User.WebApi
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "ContactApp.Module.User.WebApi", Version = "v1" });
             });
         }
+        private void InitializeDatabase(IApplicationBuilder app)
+        {
+            using (var scope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
+            {
+                scope.ServiceProvider.GetRequiredService<PGDataUserContext>().Database.Migrate();
+            }
+        }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            InitializeDatabase(app);
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

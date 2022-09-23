@@ -23,13 +23,15 @@ namespace ContactApp.Module.Report.Application.Features.Report.Command.Handler
 
         public async Task<string> Handle(DeleteReportCommand request, CancellationToken cancellationToken)
         {
-            var Entity = _reportService.SelectById(request.ObjectId);
+            int id = 0;
+            int.TryParse(request.id, out  id);
+            var Entity = _reportService.SelectById(id);
             if (Entity != null)
             {
                 //Entity.Active = false;
                 Entity.setActive(false);
                 _reportService.Save(Entity);
-                return Entity.ObjectId;
+                return Entity.Id.ToString();
 
             }
             else
