@@ -32,10 +32,6 @@ namespace ContactApp.Module.User.Application.Features.User.Queries.Handler
             int.TryParse(request.Id, out Id);
             EntityUser entityUser = new EntityUser(Id ,request.FirstName, request.LastName, request.CompanyName, true);
 
-            //EntityUser mappedPerson = _mapper.Map<EntityUser>(request);
-            ////mappedPerson.Active = true;
-            //mappedPerson.setActive(true);
-
             EntityUser createdPerson = _userService.Save(entityUser);
             List<EntityUserContactInformation> entityUserContactInformation = (from m in request.ContactInformations
                                                                                select new EntityUserContactInformation
@@ -47,15 +43,9 @@ namespace ContactApp.Module.User.Application.Features.User.Queries.Handler
                                                                                }).ToList();
 
             entityUserContactInformation.ForEach(x => x.UserId = createdPerson.Id);
-            await _userContactInformationService.SaveSpecial(entityUserContactInformation);
-            //List<EntityUserContactInformation> entityContactInformation =await  _UserContactInformationService.SaveSpecial(entityUserContactInformation);
-
-            //request.ContactInformations.ForEach(x => x.ObjectUserId = createdPerson.ObjectId);
-            //List<EntityUserContactInformation> entityContactInformation = _UserContactInformationService.SaveSpecial(request.ContactInformations);
+            await _userContactInformationService.SaveSpecial(entityUserContactInformation);            
             UpdateUserDto createdPersonDto = _mapper.Map<UpdateUserDto>(createdPerson);
             createdPersonDto.ContactInformations = request.ContactInformations;
-
-
 
             return createdPersonDto;
 
