@@ -15,7 +15,6 @@ namespace ContactApp.Module.Report.Application.Features.Report.Queries
 
     public class GetListReportQuery : IRequest<List<ReportDto>>
     {
-        //public PageRequest PageRequest { get; set; }
     
     }
 

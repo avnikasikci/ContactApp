@@ -17,8 +17,6 @@ namespace ContactApp.Module.User.Application.Features.User.Queries
     public class GetCustomerReportQuery : IRequest<CustomerReport>
     {
         public string ReportName { get; set; }
-
-
     }
 
 }

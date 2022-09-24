@@ -13,7 +13,5 @@ namespace ContactApp.Module.Report.WebApi.Controllers
         protected IMediator Mediator => _mediator ??= HttpContext.RequestServices.GetService(typeof(IMediator)) as IMediator;
 
         private IMediator? _mediator;
-
-
     }
 }

@@ -21,8 +21,6 @@ namespace ContactApp.Module.User.Application.Features.User.Command
         public string LastName { get; set; }
         public string CompanyName { get; set; }
         public List<UserContactInformationDto> ContactInformations { get; set; }
-        //public bool Active { get; set; }
-
     }
 
 }

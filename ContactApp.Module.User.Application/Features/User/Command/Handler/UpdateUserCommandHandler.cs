@@ -47,11 +47,7 @@ namespace ContactApp.Module.User.Application.Features.User.Queries.Handler
             
             UpdateUserDto createdPersonDto = _mapper.Map<UpdateUserDto>(createdPerson);
             createdPersonDto.ContactInformations = request.ContactInformations;
-
-
-
             return createdPersonDto;
-
         }
     }
 

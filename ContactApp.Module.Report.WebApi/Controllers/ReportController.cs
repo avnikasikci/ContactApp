@@ -32,9 +32,7 @@ namespace ContactApp.Module.Report.WebApi.Controllers
             _CreateReportJobService = ReportService;
             _ExportService = ExportService;
         }
-        //[HttpGet("export")]
         [HttpGet("export/{ObjectId}")]
-
         public async Task<IActionResult> Export(string ObjectId)
         {
 
@@ -54,33 +52,16 @@ namespace ContactApp.Module.Report.WebApi.Controllers
 
                         }
             });
-
             return File(exportResult, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "ExportUser(" + DateTime.Now.ToShortDateString() + ").xlsx");
-
         }
 
         [HttpGet]
         public async Task<IActionResult> GetList()
         {
-            //_CreateReportJobService.StartJob();
-            ////new CreateReportJobService().StartJob();
             GetListReportQuery getListPersonQuery = new() { };
             List<ReportDto> result = await this.Mediator.Send(getListPersonQuery);
             return Ok(result);
         }
-        //[HttpPost]
-        //public async Task<IActionResult> Add([FromBody] CreateReportCommand createReportCommand)
-        //{
-        //    CreatedReportDto result = await Mediator.Send(createReportCommand);
-        //    return Created("", result);
-        //}
-        //[HttpPut]
-        //public async Task<IActionResult> Update([FromBody] UpdateUserCommand updateUserCommand)
-        //{
-        //    UpdateUserDto result = await Mediator.Send(updateUserCommand);
-        //    return Created("", result);
-        //}
-        ////[HttpDelete]
         [HttpDelete]
         public async Task<IActionResult> Delete([FromBody] DeleteReportCommand deleteUserCommand)
         {

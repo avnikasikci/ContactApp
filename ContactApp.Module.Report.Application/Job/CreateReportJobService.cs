@@ -17,9 +17,9 @@ namespace ContactApp.Module.Report.Application.Job
 
     public class CreateReportJobService : ICreateReportJobService
     {
-        private static object _SyncRoot = new object();
+        //private static object _SyncRoot = new object();
 
-        private static int _lockFlag = 0; // 0 - free // While a transaction is in progress, other incoming transactions are canceled so that it does not wait in the queue. Flag control
+        //private static int _lockFlag = 0; // 0 - free // While a transaction is in progress, other incoming transactions are canceled so that it does not wait in the queue. Flag control
 
         public CreateReportJobService()
         {

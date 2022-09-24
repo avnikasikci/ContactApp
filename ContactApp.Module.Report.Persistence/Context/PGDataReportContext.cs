@@ -10,8 +10,7 @@ namespace ContactApp.Module.Report.Persistence.Context
 {
     public partial class PGDataReportContext : DbContext
     {
-        public DbSet<EntityReport> EntityReports { get; set; }
-        
+        public DbSet<EntityReport> EntityReports { get; set; }     
 
 
         public PGDataReportContext(DbContextOptions<PGDataReportContext> options)

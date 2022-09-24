@@ -28,11 +28,9 @@ namespace ContactApp.Module.Report.Application.Features.Report.Command.Handler
             var Entity = _reportService.SelectById(id);
             if (Entity != null)
             {
-                //Entity.Active = false;
                 Entity.setActive(false);
                 _reportService.Save(Entity);
                 return Entity.Id.ToString();
-
             }
             else
             {

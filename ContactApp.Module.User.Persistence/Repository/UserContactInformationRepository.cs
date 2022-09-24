@@ -78,9 +78,9 @@ namespace ContactApp.Module.User.Persistence.Repository
         }
         public async Task DeleteBulkDataAsync(List<EntityUserContactInformation> dataList)
         {
-            //await _context.BulkDeleteAsync(dataList);
             await _context.BulkDeleteAsync<EntityUserContactInformation>(dataList);
             _context.SaveChanges();
+
         }
 
         #endregion

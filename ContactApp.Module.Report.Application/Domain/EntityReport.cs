@@ -53,7 +53,6 @@ namespace ContactApp.Module.Report.Application.Domain
         {
             this.Id = id;
         }
-        //
         public void setReportName(string ReportName)
         {
             this.ReportName = ReportName;

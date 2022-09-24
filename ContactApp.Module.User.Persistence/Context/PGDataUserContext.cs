@@ -24,13 +24,10 @@ namespace ContactApp.Module.User.Persistence.Context
         {
             modelBuilder.UseSerialColumns();
             //modelBuilder.UseIdentityColumns();
-
             modelBuilder.HasPostgresExtension("postgis")
              .HasPostgresExtension("postgis_topology")
              .HasPostgresExtension("tablefunc")
              .HasAnnotation("Relational:Collation", "en_US.UTF-8");
-
-
         }
     }
 }

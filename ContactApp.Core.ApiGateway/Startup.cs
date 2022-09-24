@@ -29,13 +29,6 @@ namespace ContactApp.Core.ApiGateway
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddOcelot();
-
-
-            //services.AddControllers();
-            //services.AddSwaggerGen(c =>
-            //{
-            //    c.SwaggerDoc("v1", new OpenApiInfo { Title = "ContactApp.Core.WebApi", Version = "v1" });
-            //});
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -48,26 +41,7 @@ namespace ContactApp.Core.ApiGateway
                 //app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "ContactApp.Core.WebApi v1"));
             }
 
-            //app.UseHttpsRedirection();
-
-            //app.UseRouting();
-
-            //app.UseEndpoints(endpoints =>
-            //{
-            //    endpoints.MapGet("/", async context =>
-            //    {
-            //        await context.Response.WriteAsync("Hello World!");
-            //    });
-            //});
-
             await app.UseOcelot();
-
-            //app.UseAuthorization();
-
-            //app.UseEndpoints(endpoints =>
-            //{
-            //    endpoints.MapControllers();
-            //});
         }
     }
 }

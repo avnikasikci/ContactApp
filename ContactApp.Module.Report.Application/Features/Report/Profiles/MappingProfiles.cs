@@ -14,12 +14,9 @@ namespace ContactApp.Module.Report.Application.Features.Report.Profiles
     {
         public MappingProfiles()
         {
-            
             CreateMap<EntityReport,ReportDto>().ReverseMap();
             CreateMap<EntityReport, CreatedReportDto>().ReverseMap();            
             CreateMap<EntityReport, CreateReportCommand>().ReverseMap();
-            
-            
         }
     }
 

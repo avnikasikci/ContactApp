@@ -20,19 +20,6 @@ namespace ContactApp.Module.User.WebApi.Controllers
         {
             _busService = busService;
         }
-        //[HttpPost]
-        //public async Task<string> CreateReport(CustomerReport Report)
-        //{
-        //    if (Report != null)
-        //    {
-        //        Report.AddedOnDate = DateTime.Now;
-        //        Uri uri = new Uri("rabbitmq://localhost/reportQueue");
-        //        var endPoint = await _busService.GetSendEndpoint(uri);
-        //        await endPoint.Send(Report);
-        //        return "Ready Created Report";
-        //    }
-        //    return "Report Not Found";
-        //}
         [HttpPost]
         public async Task<IActionResult> Add([FromBody] GetCustomerReportQuery createUserCommand)
         {

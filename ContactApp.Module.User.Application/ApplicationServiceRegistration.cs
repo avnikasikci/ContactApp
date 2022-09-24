@@ -40,11 +40,7 @@ namespace ContactApp.Module.User.Application
 
             services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());            
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestValidationBehavior<,>));
-
-
-
             return services;
-
         }
     }
 

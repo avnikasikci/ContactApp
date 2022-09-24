@@ -17,9 +17,6 @@ namespace ContactApp.Module.Report.Persistence.Repostiory
         {
             _context = context;
         }
-
-
-
         public IQueryable<EntityReport> GetAll()
         {
             return _context.EntityReports.AsQueryable().Where(x => x.Active);

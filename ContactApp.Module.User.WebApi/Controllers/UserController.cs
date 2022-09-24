@@ -33,7 +33,6 @@ namespace ContactApp.Module.User.WebApi.Controllers
             UpdateUserDto result = await Mediator.Send(updateUserCommand);
             return Created("", result);
         }
-        //[HttpDelete]
         [HttpDelete]
         public async Task<IActionResult> Delete([FromBody] DeleteUserCommand deleteUserCommand)
         {

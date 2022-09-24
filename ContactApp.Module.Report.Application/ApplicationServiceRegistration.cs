@@ -23,10 +23,8 @@ namespace ContactApp.Module.Report.Application
     {
         public static IServiceCollection AddApplicationServices(this IServiceCollection services)
         {
-
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
             services.AddMediatR(Assembly.GetExecutingAssembly());
-
             services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestValidationBehavior<,>));
@@ -53,10 +51,7 @@ namespace ContactApp.Module.Report.Application
                 }));
             });
             services.AddMassTransitHostedService();
-
-
             return services;
-
         }
     }
 

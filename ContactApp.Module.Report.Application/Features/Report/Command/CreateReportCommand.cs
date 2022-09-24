@@ -16,13 +16,10 @@ namespace ContactApp.Module.Report.Application.Features.Report.Command
     public partial class CreateReportCommand : IRequest<CreatedReportDto>
     {
         public string ReportName { get; set; }
-
         public DateTime CreateTime { get; set; }
         public DateTime UpdateTime { get; set; }
-
-   
     }
 
-   
+
 
 }

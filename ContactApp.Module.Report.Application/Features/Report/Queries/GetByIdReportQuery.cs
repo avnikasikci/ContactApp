@@ -14,7 +14,6 @@ namespace ContactApp.Module.Report.Application.Features.Report.Queries
 
     public class GetByIdReportQuery : IRequest<ReportDto>
     {
-        //public PageRequest PageRequest { get; set; }
         public string id { get; set; }
 
     }

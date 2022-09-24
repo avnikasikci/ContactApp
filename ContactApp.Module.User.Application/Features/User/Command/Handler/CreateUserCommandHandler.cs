@@ -29,24 +29,17 @@ namespace ContactApp.Module.User.Application.Features.User.Queries.Handler
         public async Task<CreatedUserDto> Handle(CreateUserCommand request, CancellationToken cancellationToken)
         {
             EntityUser entityUser = new EntityUser(0, request.FirstName, request.LastName, request.CompanyName, true);
-            //EntityUser mappedPerson = _mapper.Map<EntityUser>(request);
-            //mappedPerson.Active = true;
-            //entityUser.setActive(true);
             EntityUser createdPerson = _userService.Add(entityUser);
-
             List<EntityUserContactInformation> entityUserContactInformation = (from m in request.ContactInformations
                                                                                select new EntityUserContactInformation
                                                                                {
-                                                                                   //Id=m.,
                                                                                    InformationDesc = m.InformationDesc,
                                                                                    InformationType = m.InformationType,
                                                                                    UserId = createdPerson.Id,
-
                                                                                }).ToList();
 
             entityUserContactInformation.ForEach(x => x.UserId = createdPerson.Id);
             await _userContactInformationService.SaveSpecial(entityUserContactInformation);
-            //List<EntityUserContactInformation> entityContactInformation = await _UserContactInformationService.SaveSpecial(entityUserContactInformation);
             CreatedUserDto createdPersonDto = _mapper.Map<CreatedUserDto>(createdPerson);
             createdPersonDto.ContactInformations = request.ContactInformations;
             return createdPersonDto;
