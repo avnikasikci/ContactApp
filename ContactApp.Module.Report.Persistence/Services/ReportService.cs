@@ -1,5 +1,4 @@
-﻿using ContactApp.Core.Persistence.Repository;
-using ContactApp.Module.Report.Application.Domain;
+﻿using ContactApp.Module.Report.Application.Domain;
 using ContactApp.Module.Report.Application.Repository;
 using ContactApp.Module.Report.Application.Services.Interfaces;
 using System;
@@ -16,12 +15,9 @@ namespace ContactApp.Module.Report.Application.Services
         private readonly IReportRepository _reportRepository;
         public ReportService(
             IReportRepository ReportRepository
-
-
-            )
+        )
         {
             _reportRepository = ReportRepository;
-
         }
 
         public IQueryable<EntityReport> GetAll()

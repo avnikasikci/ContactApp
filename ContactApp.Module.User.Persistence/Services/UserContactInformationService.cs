@@ -1,14 +1,8 @@
-﻿using ContactApp.Core.Application.SharedModels;
-using ContactApp.Core.Persistence.Repository;
-using ContactApp.Module.User.Application.Domain;
-using ContactApp.Module.User.Application.Enums;
+﻿using ContactApp.Module.User.Application.Domain;
 using ContactApp.Module.User.Application.Repository;
 using ContactApp.Module.User.Application.Services.Interfaces;
-using MongoDB.Driver;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace ContactApp.Module.User.Application.Services
@@ -16,18 +10,12 @@ namespace ContactApp.Module.User.Application.Services
 
     public class UserContactInformationService : IUserContactInformationService
     {
-        //private readonly IMongoDbRepository<EntityUserContactInformation> _contactInformationRepository;
         private readonly IUserContactInformationRepository _contactInformationRepository;
         public UserContactInformationService(
-
             IUserContactInformationRepository contactInformationRepository
-
-
-            )
+        )
         {
-
             _contactInformationRepository = contactInformationRepository;
-
         }
 
         public IQueryable<EntityUserContactInformation> GetAll()

@@ -31,12 +31,9 @@ namespace ContactApp.Module.User.Application.Features.User.Queries.Handler
             var Entity = _userService.SelectById(id);
             if (Entity != null)
             {
-                //Entity.Active = false;
                 Entity.setActive(false);
-
                 _userService.Save(Entity);
                 return Entity.Id.ToString();
-
             }
             else
             {
