@@ -48,6 +48,7 @@ namespace ContactApp.Module.Report.Application.Job
             CustomerReport customerReport = context?.Message ?? new CustomerReport() { Data = new List<CustomerReportData>() };
 
             var SaveEntity = new EntityReport(0,customerReport.ReportName,DateTime.Now,DateTime.Now, (int)EnumCollection.ReportStatus.Wait,customerReport.DataJson,"", new(),true);
+            var dataList = new List<EntityReportData>();
             foreach (var item in customerReport.Data)
             {
                 var saveDataEntity = new EntityReportData();
@@ -55,12 +56,11 @@ namespace ContactApp.Module.Report.Application.Job
                 saveDataEntity.UserCount = item.UserCount;
                 saveDataEntity.PhoneCount = item.PhoneCount;
                 saveDataEntity.MailCount = item.MailCount;
-                SaveEntity.Data.Add(saveDataEntity);
+                dataList.Add(saveDataEntity);
             }
-
-
+            SaveEntity.Data = dataList;
             SaveEntity = _ReportService.Save(SaveEntity);
-            SaveEntity.setFilePath("https://localhost:44397/api/Report/Export" + SaveEntity.Id);
+            SaveEntity.setFilePath("https://localhost:44397/api/Report/Export/" + SaveEntity.Id);
             SaveEntity.setReportStatus((int)EnumCollection.ReportStatus.Done);
             _ReportService.Save(SaveEntity);
         }

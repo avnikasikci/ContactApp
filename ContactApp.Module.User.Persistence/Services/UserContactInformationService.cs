@@ -32,51 +32,40 @@ namespace ContactApp.Module.User.Application.Services
         {
             return _contactInformationRepository.SelectById(objectId);
         }
-        public async Task AddBulkDataAsync(List<EntityUserContactInformation> dataList)
-        {
-            await _contactInformationRepository.AddBulkDataAsync(dataList);
 
+        private void Delete(EntityUserContactInformation entityPerson)
+        {
+            _contactInformationRepository.Delete(entityPerson);
         }
-        public async Task UpdateBulkDataAsync(List<EntityUserContactInformation> dataList)
+        private async Task BulkInsert(List<EntityUserContactInformation> dataList)
         {
-            await _contactInformationRepository.UpdateBulkDataAsync(dataList);
-
+            await _contactInformationRepository.BulkInsert(dataList);
         }
-        public async Task DeleteBulkDataAsync(List<EntityUserContactInformation> dataList)
+        private void BulkUpdate(List<EntityUserContactInformation> dataList)
         {
-            await _contactInformationRepository.DeleteBulkDataAsync(dataList);
-
+            _contactInformationRepository.BulkUpdate(dataList);
+        }
+        private void BulkDelete(List<EntityUserContactInformation> dataList)
+        {
+            _contactInformationRepository.BulkDelete(dataList);
+        }
+        private EntityUserContactInformation Update(EntityUserContactInformation entityPerson)
+        {
+            return _contactInformationRepository.Update(entityPerson);
         }
         public async Task<bool> SaveSpecial(List<EntityUserContactInformation> dataList)
         {
-
             var deleteRecords = this.GetAll().Where(x => x.UserId == dataList.FirstOrDefault().UserId).ToList();
-            foreach (var item in deleteRecords)
-            {
-                _contactInformationRepository.Delete(item);
-            }
-    
-            //if (deleteRecords != null && deleteRecords.Count > 0)
-            //    await this.DeleteBulkDataAsync(deleteRecords);
+            if (deleteRecords.Count > 0)
+                this.BulkDelete(deleteRecords);
 
-            var insertRecord = dataList.Where(x => x.Id.ToString() == "" || x.Id == null || x.Id <= 0).ToList();
-            foreach (var item in insertRecord)
-            {
-                _contactInformationRepository.Add(item);
-
-            }
-            //if (insertRecord != null && insertRecord.Count > 0)
-            //    await this.AddBulkDataAsync(insertRecord);
+            var insertRecord = dataList.Where(x => x.Id == null || x.Id <= 0).ToList();
+            if (insertRecord.Count > 0)
+                this.BulkInsert(insertRecord);
 
             var updateRecord = dataList.Where(x => x.Id != null && x.Id > 0).ToList();
-            foreach (var item in updateRecord)
-            {
-                _contactInformationRepository.Update(item);
-
-            }
-            //if (updateRecord != null && updateRecord.Count > 0)
-            //    await this.UpdateBulkDataAsync(updateRecord);
-
+            if (updateRecord.Count > 0)
+                this.BulkUpdate(updateRecord);
             return true;
         }
     }

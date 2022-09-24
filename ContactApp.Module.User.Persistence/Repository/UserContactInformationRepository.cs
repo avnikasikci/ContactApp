@@ -1,7 +1,6 @@
 ﻿using ContactApp.Module.User.Application.Domain;
 using ContactApp.Module.User.Application.Repository;
 using ContactApp.Module.User.Persistence.Context;
-using EFCore.BulkExtensions;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -64,29 +63,21 @@ namespace ContactApp.Module.User.Persistence.Repository
 
         }
 
-        #region  Bulk Data  
-        public async Task AddBulkDataAsync(List<EntityUserContactInformation> dataList)
+        public async Task BulkInsert(List<EntityUserContactInformation> dataList)
         {
-            await _context.BulkInsertAsync(dataList);
+            await _context.EntityUserContactInformations.AddRangeAsync(dataList);
+            await _context.SaveChangesAsync();
+        }
+        public void BulkUpdate(List<EntityUserContactInformation> dataList)
+        {
+            _context.EntityUserContactInformations.UpdateRange(dataList);
             _context.SaveChanges();
         }
-        public async Task UpdateBulkDataAsync(List<EntityUserContactInformation> dataList)
+        public void BulkDelete(List<EntityUserContactInformation> dataList)
         {
-
-            await _context.BulkUpdateAsync<EntityUserContactInformation>(dataList);
+            _context.EntityUserContactInformations.RemoveRange(dataList);
             _context.SaveChanges();
         }
-        public async Task DeleteBulkDataAsync(List<EntityUserContactInformation> dataList)
-        {
-            await _context.BulkDeleteAsync<EntityUserContactInformation>(dataList);
-            _context.SaveChanges();
-
-        }
-
-        #endregion
-
-
-
 
     }
 }

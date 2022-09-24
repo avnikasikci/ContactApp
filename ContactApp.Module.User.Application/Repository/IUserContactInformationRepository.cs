@@ -15,8 +15,8 @@ namespace ContactApp.Module.User.Application.Repository
         EntityUserContactInformation Update(EntityUserContactInformation entityPerson);
         EntityUserContactInformation SelectById(string objectId);
         void Delete(EntityUserContactInformation entity);
-        Task AddBulkDataAsync(List<EntityUserContactInformation> dataList);
-        Task UpdateBulkDataAsync(List<EntityUserContactInformation> dataList);
-        Task DeleteBulkDataAsync(List<EntityUserContactInformation> dataList);
+        Task BulkInsert(List<EntityUserContactInformation> dataList);
+        void BulkUpdate(List<EntityUserContactInformation> dataList);
+        void BulkDelete(List<EntityUserContactInformation> dataList);
     }
 }
